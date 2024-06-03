@@ -1,0 +1,152 @@
+[
+    {
+        "title": "Product Satisfaction",
+        "description": "Are you satisfied with the product you purchased?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv6qx7y",
+        "totalVotes": 0
+    },
+    {
+        "title": "Recommend to Others",
+        "description": "Would you recommend our product to others?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gpw6sxyz",
+        "totalVotes": 0
+    },
+    {
+        "title": "Customer Service",
+        "description": "Did you find our customer service helpful?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv7fsjd",
+        "totalVotes": 0
+    },
+    {
+        "title": "Job Satisfaction",
+        "description": "Are you satisfied with your current job role?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv7ks8l",
+        "totalVotes": 0
+    },
+    {
+        "title": "Training Opportunities",
+        "description": "Do you feel you have sufficient opportunities for training and development?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv7ywqr",
+        "totalVotes": 0
+    },
+    {
+        "title": "Work-Life Balance",
+        "description": "Do you feel you have a good work-life balance?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv81qwe",
+        "totalVotes": 0
+    },
+    {
+        "title": "Brand Awareness",
+        "description": "Have you heard of our brand before this survey?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv83tu3",
+        "totalVotes": 0
+    },
+    {
+        "title": "Competitor Usage",
+        "description": "Have you used any of our competitors' products?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv85rty",
+        "totalVotes": 0
+    },
+    {
+        "title": "Future Purchase",
+        "description": "Are you likely to purchase our product in the future?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv87ert",
+        "totalVotes": 0
+    },
+    {
+        "title": "Event Attendance",
+        "description": "Did you find the event beneficial?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv89jkl",
+        "totalVotes": 0
+    },
+    {
+        "title": "Recommend Event",
+        "description": "Would you recommend this event to a colleague?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv8bvcx",
+        "totalVotes": 0
+    },
+    {
+        "title": "Venue Satisfaction",
+        "description": "Were you satisfied with the venue?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv8dzxs",
+        "totalVotes": 0
+    },
+    {
+        "title": "User Experience",
+        "description": "Was the website easy to navigate?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv8fqwe",
+        "totalVotes": 0
+    },
+    {
+        "title": "Information Availability",
+        "description": "Did you find the information you were looking for on our website?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv8hwdf",
+        "totalVotes": 0
+    },
+    {
+        "title": "Contact Support",
+        "description": "Did you need to contact support while using our website?",
+        "options": [
+            "Yes",
+            "No"
+        ],
+        "id": "_5gqv8jklq",
+        "totalVotes": 0
+    }
+]
