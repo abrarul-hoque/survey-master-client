@@ -1,0 +1,24 @@
+.PricingCard:hover {
+    background-color: rgb(73, 0, 229);
+    color: #fff;
+    transition: .5s;
+}
+
+.PricingCard:hover button {
+    background-color: rgb(255, 196, 0);
+    color: #000;
+}
+
+.PricingCard:hover h1 {
+    color: rgb(255, 196, 0);
+}
+
+.pricingPlanItem {
+    /* display: list-item; */
+    margin-left: 10px;
+}
+
+.pricingPlanItem>li {
+    font-size: 15px;
+    line-height: 30px;
+}
