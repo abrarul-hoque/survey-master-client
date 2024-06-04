@@ -15,6 +15,7 @@ const NotFound = () => {
         }
     };
 
+    console.log(error)
 
     return (
         <div className='text-center'>

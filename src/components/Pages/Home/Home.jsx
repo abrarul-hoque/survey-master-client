@@ -6,21 +6,27 @@ import { Link } from 'react-router-dom';
 import FAQ from './FAQ';
 import SurveyCard from '../../shared/SurveyCard';
 import SectionTitle from '../../shared/SectionTitle';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useSurveys from '../../../hooks/useSurveys';
 
 const Home = () => {
+    const [surveys] = useSurveys();
+    // const [surveyQuestions, setSurveyQuestions] = useState([]);
+    const sixSurveys = surveys.slice(0, 6);
+    console.log(surveys)
+    // const axiosPublic = useAxiosPublic();
 
-    const [surveyQuestions, setSurveyQuestions] = useState([]);
-    const sixSurveys = surveyQuestions.slice(0, 6);
-    console.log(sixSurveys)
+    // axiosPublic.get("/surveys");
+    // console.log(res.data);
 
-    useEffect(() => {
-        fetch('/survey-data.json')
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setSurveyQuestions(data);
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch('/survey-data.json')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setSurveyQuestions(data);
+    //         })
+    // }, [])
 
 
     return (

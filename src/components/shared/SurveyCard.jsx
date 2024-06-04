@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 
 const SurveyCard = ({ survey }) => {
-    const { title, description, totalVotes } = survey;
+    const { _id, title, description, totalVotes } = survey;
 
 
     return (
@@ -9,7 +10,10 @@ const SurveyCard = ({ survey }) => {
             <h2 className='text-base mb-3'>{description}</h2>
             <div className="flex justify-between items-center">
                 <p>Total Votes: {totalVotes}</p>
-                <button className="btn btn-primary">Details</button>
+
+                <Link to={`/surveys/surveyDetails/${_id}`}>
+                    <button className="btn btn-primary">Details</button>
+                </Link>
             </div>
         </div>
     );
