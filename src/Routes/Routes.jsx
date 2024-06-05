@@ -11,6 +11,8 @@ import AboutUs from "../components/Pages/AboutUs/AboutUs";
 import Register from "../components/Pages/Register/Register";
 import Login from "../components/Pages/Login/Login";
 import DashboardRoot from "../components/DashboardRoot";
+import UserHome from "../components/Pages/UserHome/UserHome";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -51,7 +53,26 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardRoot></DashboardRoot>
+        element: <PrivateRoute><DashboardRoot></DashboardRoot></PrivateRoute>,
+        children: [
+            // Normal User Route
+            {
+                path: "userHome",
+                element: <UserHome></UserHome>
+            },
+            {
+                path: "participatedSurveys",
+                element: <UserHome></UserHome>
+            },
+            {
+                path: "reports",
+                element: <UserHome></UserHome>
+            },
+            {
+                path: "comments",
+                element: <UserHome></UserHome>
+            },
+        ]
     }
 ]);
 
