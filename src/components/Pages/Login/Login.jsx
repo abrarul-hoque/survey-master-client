@@ -1,12 +1,19 @@
 import { Helmet } from 'react-helmet';
 import loginImg from '../../../assets/log-in-girl.svg';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
+    const { signIn, setUser } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const {
         register,
@@ -14,13 +21,44 @@ const Login = () => {
         formState: { errors },
     } = useForm()
 
+    const errorToast = (errorMessage) => toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+    });
+
 
     const handleLogin = data => {
         console.log(data)
+        signIn(data.email, data.password)
+            .then(res => {
+                const user = res.user;
+                setUser(user);
+                Swal.fire({
+                    title: "Success",
+                    text: "Login successfuly!",
+                    icon: "success"
+                });
+                navigate(from, { replace: true });
+            })
+            .catch(err => {
+                console.log(err)
+                errorToast(err.message);
+
+            })
+
     }
 
     return (
         <div className='max-w-6xl mx-auto'>
+            <ToastContainer />
+
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Survey Master | Login</title>

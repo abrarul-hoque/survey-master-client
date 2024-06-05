@@ -10,6 +10,7 @@ import SurveyDetails from "../components/shared/SurveyDetails";
 import AboutUs from "../components/Pages/AboutUs/AboutUs";
 import Register from "../components/Pages/Register/Register";
 import Login from "../components/Pages/Login/Login";
+import DashboardRoot from "../components/DashboardRoot";
 
 const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: "/dashboard",
+        element: <DashboardRoot></DashboardRoot>
+    }
 ]);
 
 export default router;

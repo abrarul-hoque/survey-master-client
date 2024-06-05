@@ -16,7 +16,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     // const { createUser, updateUser } = useAuth();
-    const { createUser, updateUser } = useContext(AuthContext)
+    const { createUser, updateUser, user, setUser } = useContext(AuthContext)
 
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -43,17 +43,18 @@ const Register = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
-                updateUser(data.name, data.photo)
+                updateUser(data.name, imageRes.data.data.display_url)
                     .then(() => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
-                            image: imageRes.data.data.display_url
+                            image: imageRes.data.data.display_url,
+                            role: 'user'
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log("user added to DB");
+                                    console.log("user added to DB", res.data);
                                     reset();
                                     Swal.fire({
                                         title: "Success",
@@ -62,6 +63,8 @@ const Register = () => {
                                         timer: 1500
                                     });
                                     navigate("/")
+                                    setUser({ ...user, displayName: userInfo.name, photoURL: userInfo.image });
+                                    console.log("consoling after setUser: ", userInfo.image)
                                 }
                             })
                     })
@@ -138,8 +141,8 @@ const Register = () => {
                                 className="file-input file-input-bordered w-full" />
                             {errors.photo && <span className='text-red-400 mb-2'>Photo is required</span>}
                         </label>
-                        <h3 className='text-base text-center mt-3'>New to Survey Master? <Link to="/register" className='underline font-bold'>Register</Link></h3>
-                        <input className='btn btn-primary my-5' type="submit" value="Login" />
+                        <h3 className='text-base text-center mt-3'>Already have an Account? <Link to="/login" className='underline font-bold'>Login</Link></h3>
+                        <input className='btn btn-primary my-5 w-4/5' type="submit" value="Register" />
                     </form>
                 </div>
 

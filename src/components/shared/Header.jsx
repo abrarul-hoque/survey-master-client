@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Header = () => {
     const { user, logOut } = useAuth();
     const navLinks = <>
-        <li><NavLink to="/">Home</NavLink></li>
+        <li className='ml-6'><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/surveys">Surveys</NavLink></li>
         <li><NavLink to="/pricing">Pricing</NavLink></li>
         <li><NavLink to="/dashboard">Dashboard</NavLink></li>
@@ -45,7 +45,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/checkOut"><a className="btn btn-warning">Upgrade</a></Link>
+                    <Link to="/checkOut"><a className="btn btn-warning mr-2">Upgrade</a></Link>
                     {
                         user ?
                             <div>
