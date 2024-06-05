@@ -1,21 +1,71 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import loginImg from '../../../assets/log-in-girl.svg';
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    // const { createUser, updateUser } = useAuth();
+    const { createUser, updateUser } = useContext(AuthContext)
+
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm()
 
-    const handleRegister = data => {
+
+
+    const handleRegister = async (data) => {
         console.log(data)
+        const imageFile = { image: data.image[0] };
+        const imageRes = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-Type': "multipart/form-data"
+            }
+        });
+        console.log(imageRes);
+
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                updateUser(data.name, data.photo)
+                    .then(() => {
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                            image: imageRes.data.data.display_url
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log("user added to DB");
+                                    reset();
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "User Created successfuly!",
+                                        icon: "success",
+                                        timer: 1500
+                                    });
+                                    navigate("/")
+                                }
+                            })
+                    })
+            })
     }
 
     return (
@@ -84,7 +134,7 @@ const Register = () => {
 
                             <input
                                 type="file"
-                                {...register('photo', { required: true })}
+                                {...register('image', { required: true })}
                                 className="file-input file-input-bordered w-full" />
                             {errors.photo && <span className='text-red-400 mb-2'>Photo is required</span>}
                         </label>
