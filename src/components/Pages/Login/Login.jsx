@@ -64,7 +64,7 @@ const Login = () => {
                             {errors.password?.type === "pattern" && <span className='text-red-400'>Password must contain One number, One upper leter, One lower letter and One special character</span>}
 
                         </label>
-                        <h3 className='text-base text-center'>New to Survey Master? <Link to="/register" className='underline font-bold'>Register</Link></h3>
+                        <h3 className='text-base text-center mt-3'>New to Survey Master? <Link to="/register" className='underline font-bold'>Register</Link></h3>
                         <input className='btn btn-primary my-5' type="submit" value="Login" />
                     </form>
                 </div>
