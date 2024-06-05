@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <img src={loader} alt="" />
+        return <div className="flex justify-center"><img src={loader} alt="" /></div>
     }
 
     if (user) {

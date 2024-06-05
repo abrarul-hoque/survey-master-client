@@ -11,8 +11,9 @@ import AboutUs from "../components/Pages/AboutUs/AboutUs";
 import Register from "../components/Pages/Register/Register";
 import Login from "../components/Pages/Login/Login";
 import DashboardRoot from "../components/DashboardRoot";
-import UserHome from "../components/Pages/UserHome/UserHome";
 import PrivateRoute from "./PrivateRoute";
+import UserHome from "../components/Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../components/Pages/Dashboard/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
     {
@@ -52,8 +53,9 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: "/dashboard",
+        path: "dashboard",
         element: <PrivateRoute><DashboardRoot></DashboardRoot></PrivateRoute>,
+        errorElement: <NotFound></NotFound>,
         children: [
             // Normal User Route
             {
@@ -72,6 +74,13 @@ const router = createBrowserRouter([
                 path: "comments",
                 element: <UserHome></UserHome>
             },
+
+            //Admin Routes
+            {
+                path: "adminHome",
+                element: <AdminHome></AdminHome>
+            },
+
         ]
     }
 ]);
