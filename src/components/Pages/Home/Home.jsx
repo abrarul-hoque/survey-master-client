@@ -8,6 +8,7 @@ import SurveyCard from '../../shared/SurveyCard';
 import SectionTitle from '../../shared/SectionTitle';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import useSurveys from '../../../hooks/useSurveys';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const [surveys] = useSurveys();
@@ -31,6 +32,10 @@ const Home = () => {
 
     return (
         <div className='max-w-6xl mx-auto'>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Survey Master | Home</title>
+            </Helmet>
             <Banner></Banner>
 
             {/* 6 most voted surveys from DB */}

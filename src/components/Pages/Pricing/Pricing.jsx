@@ -2,9 +2,14 @@ import SectionTitle from "../../shared/SectionTitle";
 import { Link } from 'react-router-dom';
 
 import './Pricing.css';
+import { Helmet } from "react-helmet";
 const Pricing = () => {
     return (
         <div className="max-w-6xl mx-auto">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Survey Master | Pricing Page</title>
+            </Helmet>
             <SectionTitle subHeading={"Choose the Plan That's Right for You"} heading={"Upgrade to Pro and Unlock Advanced Features"}></SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8">
                 <div className="border p-8 rounded-xl PricingCard">

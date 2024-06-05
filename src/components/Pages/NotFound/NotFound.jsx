@@ -2,6 +2,7 @@ import { Link, useRouteError } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import notFimg from '../../../assets/notFound.json';
 import errImg from '../../../assets/errorImg.gif';
+import { Helmet } from 'react-helmet';
 
 const NotFound = () => {
     const error = useRouteError();
@@ -19,6 +20,10 @@ const NotFound = () => {
 
     return (
         <div className='text-center'>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Survey Master | Page Not Found</title>
+            </Helmet>
             <div className='flex justify-center my-8'>
 
                 {error.status === 404 ? <Lottie

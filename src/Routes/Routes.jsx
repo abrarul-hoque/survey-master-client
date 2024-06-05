@@ -8,6 +8,8 @@ import Pricing from "../components/Pages/Pricing/Pricing";
 import NotFound from "../components/Pages/NotFound/NotFound";
 import SurveyDetails from "../components/shared/SurveyDetails";
 import AboutUs from "../components/Pages/AboutUs/AboutUs";
+import Register from "../components/Pages/Register/Register";
+import Login from "../components/Pages/Login/Login";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
             {
                 path: "/aboutUs",
                 element: <AboutUs></AboutUs>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
+            },
+            {
+                path: "/register",
+                element: <Register></Register>
             },
         ]
     },
