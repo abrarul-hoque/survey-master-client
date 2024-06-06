@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAdmin from '../hooks/useAdmin';
 const DashboardRoot = () => {
-    const { logOut } = useAuth();
+    const { user, logOut } = useAuth();
 
     const [isAdmin] = useAdmin();
 
@@ -23,13 +23,17 @@ const DashboardRoot = () => {
     }
     return (
         <div className='flex gap-4'>
-            <div className='w-60 h-screen bg-warning'>
-                <img src={mainLogo} className='px-6' alt="" />
+            <div className='w-44 lg:w-60 h-screen bg-warning'>
+                <img src={mainLogo} className='px-6 my-2' alt="" />
                 <ul className='menu p-4 space-y-2'>
                     {
                         isAdmin ? <>
                             {console.log("Showing admin menus")}
+                            <div className='flex justify-center mb-4'>
+                                <img className='rounded-full h-20 w-20 border-4 border-warning' src={user.photoURL} alt="" />
+                            </div>
                             <li><NavLink to="/dashboard/adminHome">Admin Home</NavLink></li>
+                            <li><NavLink to="/dashboard/users">Users</NavLink></li>
                         </>
 
                             : <>

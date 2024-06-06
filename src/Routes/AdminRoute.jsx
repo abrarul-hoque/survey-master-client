@@ -2,6 +2,7 @@ import React from 'react';
 import useAdmin from '../hooks/useAdmin';
 import { useLocation } from 'react-router-dom';
 import loader from '../assets/loader.svg';
+import useAuth from '../hooks/useAuth';
 
 
 const AdminRoute = ({ children }) => {

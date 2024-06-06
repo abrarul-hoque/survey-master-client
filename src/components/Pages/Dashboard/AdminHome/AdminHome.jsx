@@ -1,22 +1,29 @@
 import React from 'react';
 import useAuth from '../../../../hooks/useAuth';
+import { Helmet } from 'react-helmet';
 
 const AdminHome = () => {
     const { user } = useAuth();
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Survey Master | Dashboard | Admin Home</title>
+            </Helmet>
             <h2 className='text-3xl text-center my-6'>
                 Hi! Welcome {user.displayName ? user.displayName : "Back"}
             </h2>
 
-            <div className='flex flex-col lg:flex-row'>
-                <div>
-                    <img src={user.displayUrl} alt="" />
+            <div className='flex flex-col lg:flex-row items-center gap-8 my-4 shadow-md p-10'>
+                <div className='flex-1'>
+                    <div className='flex justify-center'>
+                        <img className='rounded-full border-4 border-warning' src={user.photoURL} alt="" />
+                    </div>
                 </div>
-                <div>
-                    <h1>Name: {user.name}</h1>
-                    <h1>Email: {user.email}</h1>
+                <div className='flex-1 space-y-3'>
+                    <h1 className='text-xl lg:text-2xl'>Name: {user.displayName}</h1>
+                    <h1 className='text-xl lg:text-2xl'>Email: {user.email}</h1>
                 </div>
             </div>
         </div>

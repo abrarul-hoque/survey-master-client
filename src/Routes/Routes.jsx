@@ -14,6 +14,8 @@ import DashboardRoot from "../components/DashboardRoot";
 import PrivateRoute from "./PrivateRoute";
 import UserHome from "../components/Pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../components/Pages/Dashboard/AdminHome/AdminHome";
+import AdminRoute from "./AdminRoute";
+import Users from "../components/Pages/Dashboard/AdminHome/Users";
 
 const router = createBrowserRouter([
     {
@@ -60,7 +62,7 @@ const router = createBrowserRouter([
             // Normal User Route
             {
                 path: "userHome",
-                element: <UserHome></UserHome>
+                element: <PrivateRoute><UserHome></UserHome></PrivateRoute>
             },
             {
                 path: "participatedSurveys",
@@ -77,8 +79,16 @@ const router = createBrowserRouter([
 
             //Admin Routes
             {
+                path: "",
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
                 path: "adminHome",
-                element: <AdminHome></AdminHome>
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+                path: "users",
+                element: <AdminRoute><Users></Users></AdminRoute>
             },
 
         ]
