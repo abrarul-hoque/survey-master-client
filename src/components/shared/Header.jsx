@@ -4,9 +4,11 @@ import mainLogo from '../../assets/logo.png';
 import useAuth from '../../hooks/useAuth';
 import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
+import useAdmin from '../../hooks/useAdmin';
 
 const Header = () => {
     const { user, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
     const navLinks = <>
         <li className='ml-6'><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/surveys">Surveys</NavLink></li>
@@ -45,7 +47,8 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/checkOut"><a className="btn btn-warning mr-2">Upgrade</a></Link>
+                    {!isAdmin && <Link to="/checkOut"><a className="btn btn-warning mr-2">Upgrade</a></Link>}
+
                     {
                         user ?
                             <div>

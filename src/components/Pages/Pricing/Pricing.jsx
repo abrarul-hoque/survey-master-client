@@ -26,7 +26,7 @@ const Pricing = () => {
 
                 </div>
                 <div className="border p-8 rounded-xl PricingCard">
-                    <h1 className="text-2xl font-bold">Pro Plan - $25/month </h1>
+                    <h1 className="text-2xl font-bold">Pro Plan - $75/month </h1>
                     <div className="divider my-0"></div>
                     <div>
                         <ul className="pricingPlanItem">
@@ -38,7 +38,7 @@ const Pricing = () => {
                             <li>● Survey Result after Vote</li>
                         </ul>
                         <div className="flex justify-center my-8">
-                            <Link to="/checkout"><button className="btn btn-primary">Upgrade to Pro-User</button></Link>
+                            <Link to="/payment"><button className="btn btn-primary">Upgrade to Pro-User</button></Link>
 
                         </div>
                     </div>

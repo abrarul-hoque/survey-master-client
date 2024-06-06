@@ -16,6 +16,7 @@ import UserHome from "../components/Pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../components/Pages/Dashboard/AdminHome/AdminHome";
 import AdminRoute from "./AdminRoute";
 import Users from "../components/Pages/Dashboard/AdminHome/Users";
+import Payment from "../components/Pages/Pricing/Payment";
 
 const router = createBrowserRouter([
     {
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
             },
             {
                 path: "/surveys/surveyDetails/:id",
-                element: <SurveyDetails></SurveyDetails>,
+                element: <PrivateRoute><SurveyDetails /></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/surveys/surveyDetails/${params.id}`)
             },
             {
                 path: "/pricing",
                 element: <Pricing></Pricing>
+            },
+            {
+                path: "/payment",
+                element: <Payment></Payment>
             },
             {
                 path: "/aboutUs",
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
             // Normal User Route
             {
                 path: "userHome",
-                element: <PrivateRoute><UserHome></UserHome></PrivateRoute>
+                element: <UserHome></UserHome>
             },
             {
                 path: "participatedSurveys",
@@ -78,10 +83,10 @@ const router = createBrowserRouter([
             },
 
             //Admin Routes
-            {
-                path: "",
-                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-            },
+            // {
+            //     path: "",
+            //     element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            // },
             {
                 path: "adminHome",
                 element: <AdminRoute><AdminHome></AdminHome></AdminRoute>

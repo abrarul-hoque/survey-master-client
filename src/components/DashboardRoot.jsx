@@ -4,10 +4,16 @@ import mainLogo from '../assets/logo.png';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAdmin from '../hooks/useAdmin';
+import loader from '../assets/loader.svg';
+
 const DashboardRoot = () => {
     const { user, logOut } = useAuth();
+    const [isAdmin, isAdminLoading] = useAdmin();
 
-    const [isAdmin] = useAdmin();
+    // console.log("DashboardRoot: user", user);
+    // console.log("DashboardRoot: isAdmin", isAdmin);
+    // console.log("DashboardRoot: isAdminLoading", isAdminLoading);
+
 
     const handleSignOut = () => {
         logOut()
@@ -21,6 +27,12 @@ const DashboardRoot = () => {
             })
             .catch(err => console.log(err))
     }
+
+    if (isAdminLoading) {
+        <div className="flex justify-center"><img src={loader} alt="" /></div>
+    }
+
+
     return (
         <div className='flex gap-4'>
             <div className='w-44 lg:w-60 h-screen bg-warning'>
@@ -35,7 +47,6 @@ const DashboardRoot = () => {
                             <li><NavLink to="/dashboard/adminHome">Admin Home</NavLink></li>
                             <li><NavLink to="/dashboard/users">Users</NavLink></li>
                         </>
-
                             : <>
                                 {/* {normal User Menus} */}
                                 {console.log("Showing USER menus")}
