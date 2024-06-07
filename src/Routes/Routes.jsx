@@ -17,6 +17,8 @@ import AdminHome from "../components/Pages/Dashboard/AdminHome/AdminHome";
 import AdminRoute from "./AdminRoute";
 import Users from "../components/Pages/Dashboard/AdminHome/Users";
 import Payment from "../components/Pages/Pricing/Payment";
+import PaymentHistory from "../components/Pages/Dashboard/AdminHome/PaymentHistory";
+import PaymentHistoryUser from "../components/Pages/Dashboard/UserHome/PaymentHistoryUser";
 
 const router = createBrowserRouter([
     {
@@ -81,6 +83,10 @@ const router = createBrowserRouter([
                 path: "comments",
                 element: <UserHome></UserHome>
             },
+            {
+                path: "userPayments",
+                element: <PaymentHistoryUser></PaymentHistoryUser>
+            },
 
             //Admin Routes
             // {
@@ -94,6 +100,10 @@ const router = createBrowserRouter([
             {
                 path: "users",
                 element: <AdminRoute><Users></Users></AdminRoute>
+            },
+            {
+                path: "payments",
+                element: <AdminRoute><PaymentHistory></PaymentHistory></AdminRoute>
             },
 
         ]

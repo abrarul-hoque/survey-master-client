@@ -18,9 +18,6 @@ const CheckOut = () => {
     const totalPrice = 75;
 
 
-    const currentDate = new Date();
-    console.log(currentDate);
-
     useEffect(() => {
         if (totalPrice > 0) {
             axiosSecure.post('/create-payment-intent', { price: totalPrice })
@@ -81,7 +78,7 @@ const CheckOut = () => {
                     email: user.email,
                     price: totalPrice,
                     transactionId: paymentIntent.id,
-                    date: new Date(),
+                    date: new Date().toLocaleString(),
                     status: 'pending'
                 }
                 const res = await axiosSecure.post('/payments', payment);

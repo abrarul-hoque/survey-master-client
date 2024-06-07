@@ -46,6 +46,7 @@ const DashboardRoot = () => {
                             </div>
                             <li><NavLink to="/dashboard/adminHome">Admin Home</NavLink></li>
                             <li><NavLink to="/dashboard/users">Users</NavLink></li>
+                            <li><NavLink to="/dashboard/payments">Payments</NavLink></li>
                         </>
                             : <>
                                 {/* {normal User Menus} */}
@@ -54,6 +55,7 @@ const DashboardRoot = () => {
                                 <li><NavLink to="/dashboard/userHome">User Home</NavLink></li>
                                 <li><NavLink to="/dashboard/participatedSurveys">Participated Surveys</NavLink></li>
                                 <li><NavLink to="/dashboard/reports">Reports</NavLink></li>
+                                <li><NavLink to="/dashboard/userPayments">Payment History</NavLink></li>
                             </>
                     }
 
