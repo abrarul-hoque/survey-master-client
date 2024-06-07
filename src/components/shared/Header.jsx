@@ -5,15 +5,23 @@ import useAuth from '../../hooks/useAuth';
 import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
 import useAdmin from '../../hooks/useAdmin';
+import useSurveyor from '../../hooks/useSurveyor';
+import useProUser from '../../hooks/useProUser';
 
 const Header = () => {
     const { user, logOut } = useAuth();
     const [isAdmin] = useAdmin();
+    const [isSurveyor] = useSurveyor();
+    const [isProUser] = useProUser();
+
+    // console.log(isSurveyor)
     const navLinks = <>
         <li className='ml-6'><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/surveys">Surveys</NavLink></li>
         <li><NavLink to="/pricing">Pricing</NavLink></li>
-        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        {isAdmin ? <li><NavLink to="/dashboard/adminHome">Dashboard</NavLink></li> : isSurveyor ? <li><NavLink to="/dashboard/surveyorHome">Dashboard</NavLink></li> : <li><NavLink to="/dashboard/userHome">Dashboard</NavLink></li>}
+
+
     </>
     const handleSignOut = () => {
         logOut()
@@ -47,7 +55,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {!isAdmin && <Link to="/checkOut"><a className="btn btn-warning mr-2">Upgrade</a></Link>}
+                    {!isAdmin && !isSurveyor && !isProUser && <Link to="/payment"><a className="btn btn-warning mr-2">Upgrade</a></Link>}
 
                     {
                         user ?
@@ -59,9 +67,8 @@ const Header = () => {
                                 </a>
                                 <Tooltip className='z-9999' anchorSelect="#clickable" clickable>
                                     <div className='flex flex-col'>
-                                        <p className='mb-3  text-[#ff9123] font-bold p-3 rounded-xl'>{user.displayName}</p>
-                                        {/* <Link to="/myAccount"><button className='mb-3 bg-[#AFC4DD] text-[#000] p-3 rounded-xl'>My Account</button></Link> */}
-                                        <NavLink to="/userProfile" className='mb-3 bg-[#AFC4DD] text-[#000] p-3 rounded-xl'>User Profile</NavLink>
+                                        <p className=' text-[#ff9123] font-bold p-3 rounded-xl'>{user.displayName}</p>
+                                        <p className='text-warning my-4 font-semibold'>Logged in as: {isAdmin ? "Admin" : isSurveyor ? "Surveyor" : isProUser ? "Pro-User" : "User"} </p>
 
                                         <button onClick={handleSignOut} className='mb-3 btn btn-success text-[#000] p-3 rounded-xl'>Logout</button>
 

@@ -4,6 +4,9 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
+import useAdmin from "../../../hooks/useAdmin";
+import useSurveyor from "../../../hooks/useSurveyor";
+import useProUser from "../../../hooks/useProUser";
 
 const CheckOut = () => {
     const [error, setError] = useState("");
@@ -16,7 +19,9 @@ const CheckOut = () => {
 
     const navigate = useNavigate();
     const totalPrice = 75;
-
+    const [isAdmin] = useAdmin();
+    const [isSurveyor] = useSurveyor();
+    const [isProUser] = useProUser();
 
     useEffect(() => {
         if (totalPrice > 0) {
@@ -118,7 +123,7 @@ const CheckOut = () => {
                     <button
                         className='btn btn-primary'
                         type='submit'
-                        disabled={!stripe || !clientSecret}
+                        disabled={!stripe || !clientSecret || isProUser || isSurveyor || isAdmin}
                     >
                         Pay
                     </button>

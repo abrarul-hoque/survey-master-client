@@ -1,9 +1,18 @@
 import SectionTitle from "../../shared/SectionTitle";
 import { Link } from 'react-router-dom';
-
 import './Pricing.css';
 import { Helmet } from "react-helmet";
+import useAdmin from "../../../hooks/useAdmin";
+import useSurveyor from "../../../hooks/useSurveyor";
+import useProUser from "../../../hooks/useProUser";
+
 const Pricing = () => {
+
+    const [isAdmin] = useAdmin();
+    const [isSurveyor] = useSurveyor();
+    const [isProUser] = useProUser();
+
+
     return (
         <div className="max-w-6xl mx-auto">
             <Helmet>
@@ -38,7 +47,12 @@ const Pricing = () => {
                             <li>● Survey Result after Vote</li>
                         </ul>
                         <div className="flex justify-center my-8">
-                            <Link to="/payment"><button className="btn btn-primary">Upgrade to Pro-User</button></Link>
+                            <Link to="/payment"
+
+                            ><button
+                                disabled={isAdmin || isSurveyor || isProUser}
+                                className="btn btn-primary"
+                            >Upgrade to Pro-User</button></Link>
 
                         </div>
                     </div>
