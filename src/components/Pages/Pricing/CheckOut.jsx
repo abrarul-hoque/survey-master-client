@@ -118,6 +118,7 @@ const CheckOut = () => {
                     <button
                         className='btn btn-primary'
                         type='submit'
+                        disabled={!stripe || !clientSecret}
                     >
                         Pay
                     </button>
