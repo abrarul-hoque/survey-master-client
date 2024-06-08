@@ -1,35 +1,83 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import useAdmin from '../../hooks/useAdmin';
+import useSurveyor from '../../hooks/useSurveyor';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const SurveyDetails = () => {
+    const { user } = useAuth();
+    const [isAdmin] = useAdmin();
+    const [isSurveyor] = useSurveyor();
+    const axiosSecure = useAxiosSecure();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const [hasVoted, setHasVoted] = useState(false);
     const survey = useLoaderData();
-    const { title, description, options, totalVotes } = survey;
+    const { _id, title, description, options, totalVotes } = survey;
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+    useEffect(() => {
+        if (user) {
+            checkIfVoted();
+        }
+    }, [user]);
 
+    const checkIfVoted = async () => {
+        const res = await axiosSecure.get(`/vote/check/${_id}/${user?.email}`);
+        setHasVoted(res.data?.hasVoted);
+    }
 
-    const submitVote = (data) => {
-        // e.preventDefault();
-        // const form = e.target;
-        // const surveyAns = form.surveyOption;
-        console.log(data)
+    const errorToast = (errorMessage) => toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+    });
+
+    const submitVote = async (data) => {
+        if (!user) {
+            errorToast("Please log in to submit your vote!");
+            return;
+        }
+        const voteResponse = {
+            surveyId: _id,
+            vote: data?.vote,
+            userEmail: user?.email,
+            userName: user?.displayName,
+        }
+        try {
+            const res = await axiosSecure.post("/vote", voteResponse);
+            if (res.data?.insertedId) {
+                console.log("Submitted Response", res.data);
+                setHasVoted(true);
+            }
+        } catch (error) {
+
+            if (error.response && error.response.status === 401) {
+                errorToast("You have already voted on this survey");
+            } else {
+                errorToast("An error occured while submitting vote");
+            }
+            console.error("Error Submitting vote:", error);
+        }
+
     }
 
 
-    // const onSubmit = (data) => console.log(data)
 
-    const submitComment = (e) => {
-        console.log(e)
-    }
+
 
     return (
         <div className='max-w-4xl mx-auto my-8'>
+            <ToastContainer />
+
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Survey Master | {title}</title>
@@ -39,44 +87,40 @@ const SurveyDetails = () => {
                 <h2 className='text-base mb-3'>{description}</h2>
                 <div >
                     <form onSubmit={handleSubmit(submitVote)}>
-                        {
-                            options.map((option, idx) =>
-                                <label key={idx} className="cursor-pointer flex">
-                                    <input
-                                        type="radio"
-                                        name="surveyOption"
-                                        {...register('surveyOption', { required: true })}
-                                        className="checked:bg-blue-500"
-                                    />
-                                    <span className="label-text ml-2"> {option}</span>
-                                </label>
-                            )
-                        }
+                        <label className="cursor-pointer flex mb-4">
+                            <input
+                                type="radio"
+                                {...register('vote', { required: "Please select an option" })}
+                                className="radio radio-primary"
+                                value="Yes"
+                                disabled={hasVoted}
+                            />
+                            <span className="label-text ml-2 text-base">Yes</span>
+                        </label>
+                        <label className="cursor-pointer flex mb-2">
+                            <input
+                                type="radio"
+                                {...register('vote', { required: "Please select an option" })}
+                                value="No"
+                                disabled={hasVoted}
+                                className="radio radio-primary"
+                            />
+                            <span className="label-text ml-2 text-base">No</span>
+                        </label>
+                        {/* {errors.vote && <p className='text-red-400 my-2'>{errors.vote.message}</p>} */}
+                        {errors.vote && <p className='text-red-400 my-2'>{errors.vote.message}</p>}
 
-
-                        <input className='btn btn-primary my-4' type="submit" value="Submit" />
+                        <input
+                            className='btn btn-primary my-4'
+                            type="submit"
+                            value="Submit"
+                            disabled={isAdmin || isSurveyor || hasVoted}
+                        />
                     </form>
                 </div>
             </div>
 
 
-            {/* form to submit comment */}
-            <div>
-                <form onSubmit={handleSubmit(submitComment)}>
-                    <label className="form-control">
-                        <div className="label">
-                            <span className="label-text">Add comment:</span>
-                        </div>
-                        <textarea {...register("comment", { required: true })} className="textarea textarea-bordered h-24" placeholder="Add your Comment"></textarea>
-                        {/* errors will return when field validation fails  */}
-                        {errors.comment && <span className='text-red-400 my-4'>This field is required</span>}
-                    </label>
-                    <div className='flex justify-end'>
-                        <input className='btn btn-warning my-5' type="submit" value="Post comment" />
-
-                    </div>
-                </form>
-            </div>
         </div>
     );
 };

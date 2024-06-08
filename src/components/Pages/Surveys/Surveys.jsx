@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 
 const Surveys = () => {
+
     return (
         <div className="max-w-6xl mx-auto">
             <Helmet>

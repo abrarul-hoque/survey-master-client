@@ -36,7 +36,6 @@ const UpdateSurvey = () => {
         const updatedSurveyData = {
             title: data.title,
             description: data.description,
-            surveyStatus: data.surveyStatus,
             category: data.category,
             deadline: data.deadline,
             surveyStatus: data.surveyStatus,

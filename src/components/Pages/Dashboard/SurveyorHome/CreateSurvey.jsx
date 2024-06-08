@@ -4,10 +4,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const CreateSurvey = () => {
     const { user } = useAuth();
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
 
     const [deadline, setDeadline] = useState(new Date());
@@ -22,8 +23,8 @@ const CreateSurvey = () => {
         const surveyData = {
             title: data.title,
             description: data.description,
-            yesOption: parseInt(data.yesOption, 10),
-            noOption: parseInt(data.noOption, 10),
+            yesOption: 0,
+            noOption: 0,
             category: data.category,
             deadline: data.deadline,
             surveyStatus: "publish",
@@ -33,6 +34,16 @@ const CreateSurvey = () => {
         console.log(surveyData)
         const res = await axiosSecure.post('/surveys', surveyData);
         console.log(res.data);
+        if (res.data.insertedId) {
+            reset();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${data.title} has been Added!`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
 
     };
 
@@ -75,9 +86,9 @@ const CreateSurvey = () => {
                             </div>
                             <input
                                 type="number"
-                                placeholder="Type here"
+                                disabled
                                 defaultValue={0}
-                                {...register("yesOption", { required: true })}
+                                // {...register("yesOption", { required: true })}
                                 className="input input-bordered w-full" />
                             <p className='text-red-400 my-2'>{errors.yesOption && <span className=''>YesOption Count is required</span>}</p>
 
@@ -89,9 +100,9 @@ const CreateSurvey = () => {
                             </div>
                             <input
                                 type="number"
-                                placeholder="Type here"
+                                disabled
                                 defaultValue={0}
-                                {...register("noOption", { required: true })}
+                                // {...register("noOption", { required: true })}
                                 className="input input-bordered w-full" />
                             <p className='text-red-400 my-2'>{errors.noOption && <span className=''>NoOption Count  is required</span>}</p>
                         </label>
