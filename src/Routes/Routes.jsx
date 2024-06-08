@@ -19,6 +19,8 @@ import Users from "../components/Pages/Dashboard/AdminHome/Users";
 import Payment from "../components/Pages/Pricing/Payment";
 import PaymentHistory from "../components/Pages/Dashboard/AdminHome/PaymentHistory";
 import PaymentHistoryUser from "../components/Pages/Dashboard/UserHome/PaymentHistoryUser";
+import SurveyorHome from "../components/Pages/Dashboard/SurveyorHome/SurveyorHome";
+import CreateSurvey from "../components/Pages/Dashboard/SurveyorHome/CreateSurvey";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/surveys/surveyDetails/:id",
-                element: <PrivateRoute><SurveyDetails /></PrivateRoute>,
+                element: <SurveyDetails />,
                 loader: ({ params }) => fetch(`http://localhost:5000/surveys/surveyDetails/${params.id}`)
             },
             {
@@ -61,6 +63,34 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: "dashboard/surveyor",
+        element: <PrivateRoute><DashboardRoot></DashboardRoot></PrivateRoute>,
+        errorElement: <NotFound></NotFound>,
+        children: [
+            // Surveyor User Route
+            {
+                path: "surveyorHome",
+                element: <SurveyorHome></SurveyorHome>
+            },
+            {
+                path: "create",
+                element: <CreateSurvey></CreateSurvey>
+            },
+            {
+                path: "surveys",
+                element: <UserHome></UserHome>
+            },
+            {
+                path: "feedbacks",
+                element: <UserHome></UserHome>
+            },
+
+
+        ]
+    },
+
+    //Admin Routes
     {
         path: "dashboard",
         element: <PrivateRoute><DashboardRoot></DashboardRoot></PrivateRoute>,
@@ -88,11 +118,8 @@ const router = createBrowserRouter([
                 element: <PaymentHistoryUser></PaymentHistoryUser>
             },
 
+
             //Admin Routes
-            // {
-            //     path: "",
-            //     element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-            // },
             {
                 path: "adminHome",
                 element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
@@ -107,7 +134,8 @@ const router = createBrowserRouter([
             },
 
         ]
-    }
+    },
 ]);
 
 export default router;
+

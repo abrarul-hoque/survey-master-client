@@ -5,10 +5,12 @@ import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAdmin from '../hooks/useAdmin';
 import loader from '../assets/loader.svg';
+import useSurveyor from '../hooks/useSurveyor';
 
 const DashboardRoot = () => {
     const { user, logOut } = useAuth();
     const [isAdmin, isAdminLoading] = useAdmin();
+    const [isSurveyor] = useSurveyor();
 
     // console.log("DashboardRoot: user", user);
     // console.log("DashboardRoot: isAdmin", isAdmin);
@@ -48,15 +50,25 @@ const DashboardRoot = () => {
                             <li><NavLink to="/dashboard/users">Users</NavLink></li>
                             <li><NavLink to="/dashboard/payments">Payments</NavLink></li>
                         </>
-                            : <>
-                                {/* {normal User Menus} */}
-                                {console.log("Showing USER menus")}
+                            :
+                            isSurveyor ? <>
+                                {console.log("Showing Surveyor menus")}
+                                <li><NavLink to="/dashboard/surveyor/surveyorHome">Surveyor Home</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/create">Create a Survey</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/surveys">Surveys</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/feedbacks">Feedbacks</NavLink></li>
 
-                                <li><NavLink to="/dashboard/userHome">User Home</NavLink></li>
-                                <li><NavLink to="/dashboard/participatedSurveys">Participated Surveys</NavLink></li>
-                                <li><NavLink to="/dashboard/reports">Reports</NavLink></li>
-                                <li><NavLink to="/dashboard/userPayments">Payment History</NavLink></li>
                             </>
+                                :
+                                <>
+                                    {/* {normal User Menus} */}
+                                    {console.log("Showing USER menus")}
+
+                                    <li><NavLink to="/dashboard/userHome">User Home</NavLink></li>
+                                    <li><NavLink to="/dashboard/participatedSurveys">Participated Surveys</NavLink></li>
+                                    <li><NavLink to="/dashboard/reports">Reports</NavLink></li>
+                                    <li><NavLink to="/dashboard/userPayments">Payment History</NavLink></li>
+                                </>
                     }
 
 

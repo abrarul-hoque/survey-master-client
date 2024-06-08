@@ -1,7 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import useAuth from '../../../../hooks/useAuth';
 
 const SurveyorHome = () => {
+    const { user } = useAuth();
     return (
         <div>
             <Helmet>
