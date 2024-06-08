@@ -1,108 +1,132 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useLoaderData } from 'react-router-dom';
+import ReactDatePicker from 'react-datepicker';
+import Swal from 'sweetalert2';
 
-const CreateSurvey = () => {
+const UpdateSurvey = () => {
     const { user } = useAuth();
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
+    const survey = useLoaderData();
+    console.log(survey);
+    const { _id, title, description, yesOption, noOption, category, deadline, surveyStatus } = survey;
 
-    const [deadline, setDeadline] = useState(new Date());
+    const [selectedDeadline, setSelectedDeadline] = useState(new Date(deadline));
+
+    useEffect(() => {
+        setValue('title', title);
+        setValue('description', description);
+        setValue('yesOption', yesOption);
+        setValue('noOption', noOption);
+        setValue('category', category);
+        setValue('surveyStatus', surveyStatus);
+        setValue('deadline', new Date(deadline));
+    }, [setValue, title, description, yesOption, noOption, category, deadline]);
 
     const handleDateChange = (date) => {
-        setDeadline(date);
+        setSelectedDeadline(date);
         setValue('deadline', date);
     };
 
-    const handleCreateSurvey = async (data) => {
+    const handleUpdateSurvey = async (data) => {
         console.log(data)
-        const surveyData = {
+        const updatedSurveyData = {
             title: data.title,
             description: data.description,
-            yesOption: parseInt(data.yesOption, 10),
-            noOption: parseInt(data.noOption, 10),
+            surveyStatus: data.surveyStatus,
             category: data.category,
             deadline: data.deadline,
-            surveyStatus: "publish",
-            createdBy: user?.email,
-            createdOn: new Date().toLocaleString()
+            surveyStatus: data.surveyStatus,
+            updatedOn: new Date().toLocaleString()
         }
-        console.log(surveyData)
-        const res = await axiosSecure.post('/surveys', surveyData);
-        console.log(res.data);
-
+        console.log(updatedSurveyData)
+        const surveyUpdateRes = await axiosSecure.patch(`/surveyor/update/${_id}`, updatedSurveyData);
+        console.log(surveyUpdateRes.data);
+        if (surveyUpdateRes.data.modifiedCount > 0) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${data.title} has been Updated!`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     };
-
-
-
     return (
         <div>
-            <h1 className='text-3xl font-bold text-center'>Create a survey</h1>
 
+            <h1 className='text-3xl font-bold text-center'>Update a survey</h1>
             <div>
-                <form onSubmit={handleSubmit(handleCreateSurvey)}>
+                <form onSubmit={handleSubmit(handleUpdateSurvey)}>
                     <label className="form-control w-full ">
                         <div className="label">
                             <span className="label-text">Survey Title</span>
                         </div>
                         <input
                             type="text"
-                            placeholder="Type here"
+                            placeholder="Survey Title"
                             {...register("title", { required: true })}
                             className="input input-bordered w-full " />
                     </label>
                     <p className='text-red-400 my-2'>{errors.title && <span className=''>Title is required</span>}</p>
-
                     <label className="form-control w-full ">
                         <div className="label">
                             <span className="label-text">Survey Description</span>
                         </div>
                         <input
                             type="text"
-                            placeholder="Type here"
+                            placeholder="Survey Description"
                             {...register("description", { required: true })}
                             className="input input-bordered w-full " />
                     </label>
                     <p className='text-red-400 my-2'>{errors.description && <span className=''>Description is required</span>}</p>
 
                     <div className='flex justify-between gap-2'>
-                        <label className="form-control w-full lg:w-1/2">
+                        <label className="form-control w-full lg:w-1/3">
                             <div className="label">
                                 <span className="label-text">Survey Options (Yes)</span>
                             </div>
                             <input
                                 type="number"
-                                placeholder="Type here"
-                                defaultValue={0}
                                 {...register("yesOption", { required: true })}
-                                className="input input-bordered w-full" />
+                                className="input input-bordered w-full" disabled />
                             <p className='text-red-400 my-2'>{errors.yesOption && <span className=''>YesOption Count is required</span>}</p>
 
                         </label>
 
-                        <label className="form-control w-full lg:w-1/2">
+                        <label className="form-control w-full lg:w-1/3">
                             <div className="label">
                                 <span className="label-text">Survey Options (No)</span>
                             </div>
                             <input
                                 type="number"
-                                placeholder="Type here"
-                                defaultValue={0}
                                 {...register("noOption", { required: true })}
-                                className="input input-bordered w-full" />
+                                className="input input-bordered w-full" disabled />
                             <p className='text-red-400 my-2'>{errors.noOption && <span className=''>NoOption Count  is required</span>}</p>
+                        </label>
+                        <label className="form-control w-full lg:w-1/3">
+                            <div className="label">
+                                <span className="label-text">Survey Status</span>
+                            </div>
+                            <select {...register("surveyStatus", { required: true })} defaultValue={"none"} className="select select-bordered">
+                                <option disabled value="none">Select Status</option>
+                                <option value="publish">Publish</option>
+                                <option value="unpublish">Unpublish</option>
+                            </select>
+                            <p className='text-red-400 my-2'>{errors.category && <span className=''>SurveyStatus is required</span>}</p>
+
                         </label>
                     </div>
                     <div className='flex justify-between gap-2'>
-                        <label className="form-control w-full ">
+                        <label className="form-control w-full lg:w-1/2 ">
                             <div className="label">
                                 <span className="label-text">Survey Category</span>
                             </div>
-                            <select   {...register("category", { required: true })} className="select select-bordered">
-                                <option disabled selected>Select a Category</option>
+                            <select {...register("category", { required: true })} defaultValue={"none"} className="select select-bordered">
+                                <option disabled value="none">Select a Category</option>
                                 <option value="Customer Satisfaction">Customer Satisfaction</option>
                                 <option value="Employee Engagement">Employee Engagement</option>
                                 <option value="Market Research">Market Research</option>
@@ -120,22 +144,20 @@ const CreateSurvey = () => {
                                 <span className="label-text">Survey Deadline</span>
                             </div>
 
-                            <DatePicker
+                            <ReactDatePicker
                                 {...register("deadline", { required: true })}
+                                // value={deadline}
                                 className='input input-bordered w-full'
-                                selected={deadline}
+                                selected={selectedDeadline}
                                 onChange={handleDateChange}
                             />
-                            <p className='text-red-400 my-2'>{errors.deadline && <span className=''>Deadline is required</span>}</p>
                         </label>
                     </div>
-
-
-                    <input className='btn btn-primary' type="submit" value="Create Survey" />
+                    <input className='btn btn-primary' type="submit" value="Update Survey" />
                 </form>
             </div>
         </div>
     );
 };
 
-export default CreateSurvey;
+export default UpdateSurvey;

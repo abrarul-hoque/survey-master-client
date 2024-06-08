@@ -21,6 +21,8 @@ import PaymentHistory from "../components/Pages/Dashboard/AdminHome/PaymentHisto
 import PaymentHistoryUser from "../components/Pages/Dashboard/UserHome/PaymentHistoryUser";
 import SurveyorHome from "../components/Pages/Dashboard/SurveyorHome/SurveyorHome";
 import CreateSurvey from "../components/Pages/Dashboard/SurveyorHome/CreateSurvey";
+import SurveysBySurveyor from "../components/Pages/Dashboard/SurveyorHome/SurveysBySurveyor";
+import UpdateSurvey from "../components/Pages/Dashboard/SurveyorHome/UpdateSurvey";
 
 const router = createBrowserRouter([
     {
@@ -79,7 +81,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "surveys",
-                element: <UserHome></UserHome>
+                element: <SurveysBySurveyor></SurveysBySurveyor>
+            },
+            {
+                path: "update/:id",
+                element: <UpdateSurvey></UpdateSurvey>,
+                loader: ({ params }) => fetch(`http://localhost:5000/surveys/surveyDetails/${params.id}`)
             },
             {
                 path: "feedbacks",
