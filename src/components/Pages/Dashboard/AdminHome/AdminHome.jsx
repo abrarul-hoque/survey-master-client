@@ -1,9 +1,11 @@
 import React from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import { Helmet } from 'react-helmet';
+import useAdmin from '../../../../hooks/useAdmin';
 
 const AdminHome = () => {
     const { user } = useAuth();
+    const [isAdmin, isAdminLoading] = useAdmin();
 
     return (
         <div>
@@ -24,7 +26,7 @@ const AdminHome = () => {
                 <div className='flex-1 space-y-3'>
                     <h1 className='text-xl lg:text-2xl'>Name: {user.displayName}</h1>
                     <h1 className='text-xl lg:text-2xl'>Email: {user.email}</h1>
-                    <h1 className='text-xl lg:text-2xl'>User Role: Admin</h1>
+                    <h1 className='text-xl lg:text-2xl'>User Role: {isAdmin && "Admin"}</h1>
                 </div>
             </div>
         </div>

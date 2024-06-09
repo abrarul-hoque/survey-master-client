@@ -12,9 +12,13 @@ import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const [surveys] = useSurveys();
+    console.log("before sort:", surveys)
+
+    // const sortedSurveys = surveys.sort((a, b) => b.yesOption + b.noOption - (a.yesOption + a.noOption));
+    // console.log("after sort: ", sortedSurveys)
+
     // const [surveyQuestions, setSurveyQuestions] = useState([]);
     const sixSurveys = surveys.slice(0, 6);
-    console.log(surveys)
     // const axiosPublic = useAxiosPublic();
 
     // axiosPublic.get("/surveys");

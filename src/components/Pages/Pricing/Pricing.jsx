@@ -47,7 +47,7 @@ const Pricing = () => {
 
                 </div>
                 <div className="border p-8 rounded-xl PricingCard">
-                    <h1 className="text-2xl font-bold">Pro Plan - $75/month </h1>
+                    <h1 className="text-2xl font-bold">Pro Plan - $75/Year </h1>
                     <div className="divider my-0"></div>
                     <div>
                         <ul className="pricingPlanItem">

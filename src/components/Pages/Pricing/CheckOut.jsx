@@ -18,6 +18,7 @@ const CheckOut = () => {
     const { user } = useAuth();
 
     const navigate = useNavigate();
+
     const totalPrice = 75;
     const [isAdmin] = useAdmin();
     const [isSurveyor] = useSurveyor();
@@ -90,6 +91,7 @@ const CheckOut = () => {
                 console.log("payment saved", res.data);
 
                 if (res.data?.paymentResult?.insertedId) {
+                    window.location.reload();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

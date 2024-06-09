@@ -38,14 +38,20 @@ const AuthProvider = ({ children }) => {
             console.log(currentUser)
             if (currentUser) {
                 //get token and store on client side
-                const userInfo = { email: currentUser.email };
+                const userInfo = { email: currentUser?.email };
                 axiosPublic.post('/jwt', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        console.log("token Response", res.data);
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
-                            setLoading(false);
+                            // setLoading(false);  ///Comment to check with chatgpt
                         }
+                    })
+                    .catch(error => {
+                        console.log("Error getting Token: ", error);
+                    })
+                    .finally(() => {
+                        setLoading(false);  ///Comment to check with chatgpt
                     })
             }
             else {
@@ -56,9 +62,10 @@ const AuthProvider = ({ children }) => {
             // console.log("current user: ", currentUser);
         });
 
-        return () => {
-            return unsubscribe();
-        }
+        // return () => {
+        //     return unsubscribe();
+        // }
+        return () => unsubscribe();
     }, [axiosPublic])
 
     const authInfo = {

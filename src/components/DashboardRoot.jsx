@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import mainLogo from '../assets/logo.png';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ const DashboardRoot = () => {
     const [isAdmin, isAdminLoading] = useAdmin();
     const [isSurveyor] = useSurveyor();
     const [isProUser] = useProUser();
-
+    const navigate = useNavigate();
     // console.log("DashboardRoot: user", user);
     // console.log("DashboardRoot: isAdmin", isAdmin);
     // console.log("DashboardRoot: isAdminLoading", isAdminLoading);
@@ -28,6 +28,7 @@ const DashboardRoot = () => {
                     icon: "success",
                     timer: 1500
                 });
+                navigate('/')
             })
             .catch(err => console.log(err))
     }

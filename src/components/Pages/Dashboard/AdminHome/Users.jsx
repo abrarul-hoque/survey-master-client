@@ -105,8 +105,9 @@ const Users = () => {
                                             onChange={() => handleMakeSurveyor(singleUser)}
                                             className="select select-bordered w-full max-w-xs"
                                             disabled={singleUser.email === user.email}
+                                            defaultValue={"none"}
                                         >
-                                            <option disabled selected>Change Role</option>
+                                            <option disabled value="none">Change Role</option>
                                             <option value="surveyor" >Surveyor</option>
                                         </select>
                                     </td>
