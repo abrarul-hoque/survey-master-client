@@ -6,12 +6,12 @@ const SurveyCard = ({ survey }) => {
 
 
     return (
-        <div className='border p-6 my-2 rounded-xl'>
+        <div className='border p-6 my-2 rounded-xl shadow-md'>
             <h1 className='text-xl font-bold mb-3'>{title}:</h1>
             <h2 className='text-base mb-3'>{description}</h2>
             <p className="text-base my-2">Category: {category}</p>
             <div className="flex justify-between items-center">
-                <p>Total Votes: {yesOption + noOption || "No vote casted yet"}</p>
+                <p>Total Votes: {yesOption + noOption}</p>
                 <p>Deadline: {moment(deadline).format('LL')}</p>
             </div>
 

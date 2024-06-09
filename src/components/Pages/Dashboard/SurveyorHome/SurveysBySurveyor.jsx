@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
-import { FaPen } from 'react-icons/fa6';
+import { FaPen, FaTrash } from 'react-icons/fa6';
 import { FcViewDetails } from "react-icons/fc";
 import Swal from 'sweetalert2';
 import useSurveyor from '../../../../hooks/useSurveyor';
@@ -83,12 +83,12 @@ const SurveysBySurveyor = () => {
                                 <td>{survey.surveyStatus}</td>
                                 <td>
                                     <Link to={`/dashboard/surveyor/update/${survey._id}`}>
-                                        <button className='btn btn-warning mr-2 btn-sm tooltip' alt="Update" data-tip="Update"><FaPen></FaPen></button>
+                                        <button className='btn btn-warning mr-2 mb-1 btn-sm tooltip' alt="Update" data-tip="Update"><FaPen></FaPen></button>
                                     </Link>
                                     <Link to={`/surveys/surveyDetails/${survey._id}`}>
-                                        <button className="btn btn-primary btn-sm tooltip" alt="Details" data-tip="Details"><FcViewDetails /></button>
+                                        <button className="btn btn-primary mr-2 mb-1 btn-sm tooltip" alt="Details" data-tip="Details"><FcViewDetails /></button>
                                     </Link>
-                                    <button onClick={() => handleDeleteSurvey(survey._id)} className='btn btn-danger'>Delete</button>
+                                    <button onClick={() => handleDeleteSurvey(survey._id)} className='btn btn-error btn-sm'><FaTrash></FaTrash></button>
                                 </td>
                             </tr>)
                         }

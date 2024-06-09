@@ -9,6 +9,8 @@ import { Bounce, ToastContainer, toast } from 'react-toastify';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useSurveys from '../../hooks/useSurveys';
+import { useQueryClient } from '@tanstack/react-query';
+import { reload } from 'firebase/auth';
 
 const SurveyDetails = () => {
     const { user } = useAuth();
@@ -19,7 +21,8 @@ const SurveyDetails = () => {
     const [hasVoted, setHasVoted] = useState(false);
     const survey = useLoaderData();
     const { _id, title, description, category, deadline, createdOn, yesOption, noOption } = survey;
-    const [, refetch] = useSurveys();
+    const queryClient = useQueryClient();
+
     useEffect(() => {
         if (user) {
             checkIfVoted();
@@ -59,12 +62,24 @@ const SurveyDetails = () => {
             if (res.data?.voteResult?.insertedId) {
                 console.log("Submitted Response", res.data);
                 setHasVoted(true);
-                refetch();
+                // Swal.fire({
+                //     title: "Success",
+                //     text: "Your vote submitted Successfully",
+                //     icon: "success",
+                //     // timer: 1500
+                // })
                 Swal.fire({
                     title: "Success",
                     text: "Your vote submitted Successfully",
                     icon: "success",
-                    timer: 1500
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ok"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
                 });
             }
         } catch (error) {
@@ -76,7 +91,6 @@ const SurveyDetails = () => {
             }
             console.error("Error Submitting vote:", error);
         }
-
     }
 
 

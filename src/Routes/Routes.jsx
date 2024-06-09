@@ -23,6 +23,9 @@ import SurveyorHome from "../components/Pages/Dashboard/SurveyorHome/SurveyorHom
 import CreateSurvey from "../components/Pages/Dashboard/SurveyorHome/CreateSurvey";
 import SurveysBySurveyor from "../components/Pages/Dashboard/SurveyorHome/SurveysBySurveyor";
 import UpdateSurvey from "../components/Pages/Dashboard/SurveyorHome/UpdateSurvey";
+import ParticipatedSurveys from "../components/Pages/Dashboard/UserHome/ParticipatedSurveys";
+import Comments from "../components/Pages/Dashboard/UserHome/Comments";
+import Reports from "../components/Pages/Dashboard/UserHome/Reports";
 
 const router = createBrowserRouter([
     {
@@ -110,15 +113,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "participatedSurveys",
-                element: <UserHome></UserHome>
+                element: <ParticipatedSurveys></ParticipatedSurveys>
             },
             {
                 path: "reports",
-                element: <UserHome></UserHome>
+                element: <Reports></Reports>
             },
             {
                 path: "comments",
-                element: <UserHome></UserHome>
+                element: <Comments />
             },
             {
                 path: "userPayments",

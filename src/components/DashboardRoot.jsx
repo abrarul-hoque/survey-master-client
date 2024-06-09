@@ -6,11 +6,13 @@ import Swal from 'sweetalert2';
 import useAdmin from '../hooks/useAdmin';
 import loader from '../assets/loader.svg';
 import useSurveyor from '../hooks/useSurveyor';
+import useProUser from '../hooks/useProUser';
 
 const DashboardRoot = () => {
     const { user, logOut } = useAuth();
     const [isAdmin, isAdminLoading] = useAdmin();
     const [isSurveyor] = useSurveyor();
+    const [isProUser] = useProUser();
 
     // console.log("DashboardRoot: user", user);
     // console.log("DashboardRoot: isAdmin", isAdmin);
@@ -37,7 +39,7 @@ const DashboardRoot = () => {
 
     return (
         <div className='flex gap-4'>
-            <div className='w-44 lg:w-60 h-screen bg-warning'>
+            <div className='w-44 lg:w-60 min-h-screen bg-warning'>
                 <img src={mainLogo} className='px-6 my-2' alt="" />
                 <ul className='menu p-4 space-y-2'>
                     {
@@ -67,7 +69,11 @@ const DashboardRoot = () => {
                                     <li><NavLink to="/dashboard/userHome">User Home</NavLink></li>
                                     <li><NavLink to="/dashboard/participatedSurveys">Participated Surveys</NavLink></li>
                                     <li><NavLink to="/dashboard/reports">Reports</NavLink></li>
-                                    <li><NavLink to="/dashboard/userPayments">Payment History</NavLink></li>
+                                    {isProUser && <>
+                                        <li><NavLink to="/dashboard/comments">Comments</NavLink></li>
+                                        <li><NavLink to="/dashboard/userPayments">Payment History</NavLink></li>
+                                    </>}
+
                                 </>
                     }
 
@@ -77,7 +83,7 @@ const DashboardRoot = () => {
                     <li><NavLink to="userHome"></NavLink></li> */}
 
                     <div className='divider'></div>
-                    <li><NavLink to="/">Home</NavLink></li>
+                    <li ><NavLink to="/" className="mt-16">Home</NavLink></li>
                     <button onClick={handleSignOut} className='btn'>Logout</button>
                 </ul>
             </div>
