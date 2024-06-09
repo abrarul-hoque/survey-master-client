@@ -19,7 +19,7 @@ const Header = () => {
         <li className='ml-6'><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/surveys">Surveys</NavLink></li>
         <li><NavLink to="/pricing">Pricing</NavLink></li>
-        {isAdmin ? <li><NavLink to="/dashboard/adminHome">Dashboard</NavLink></li> : isSurveyor ? <li><NavLink to="/dashboard/surveyor/surveyorHome">Dashboard</NavLink></li> : <li><NavLink to="/dashboard/userHome">Dashboard</NavLink></li>}
+        {isAdmin ? <li><NavLink to="/dashboard/adminHome">Dashboard</NavLink></li> : isSurveyor ? <li><NavLink to="/dashboard/surveyor/surveyorHome">Dashboard</NavLink></li> : user ? <li><NavLink to="/dashboard/userHome">Dashboard</NavLink></li> : ""}
 
     </>
     const handleSignOut = () => {

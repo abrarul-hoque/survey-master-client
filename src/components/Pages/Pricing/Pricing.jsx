@@ -5,16 +5,17 @@ import { Helmet } from "react-helmet";
 import useAdmin from "../../../hooks/useAdmin";
 import useSurveyor from "../../../hooks/useSurveyor";
 import useProUser from "../../../hooks/useProUser";
+import useAuth from "../../../hooks/useAuth";
 
 const Pricing = () => {
-
+    const { user } = useAuth();
     const [isAdmin] = useAdmin();
     const [isSurveyor] = useSurveyor();
     const [isProUser] = useProUser();
 
 
     return (
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto p-4">
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Survey Master | Pricing Page</title>
@@ -31,6 +32,17 @@ const Pricing = () => {
                             <li>● Free Register</li>
                             <li>● Survey Result after Vote</li>
                         </ul>
+                        <div className="flex justify-center my-8">
+                            <Link to="/register">
+                                <button
+                                    disabled={user}
+                                    className="btn btn-primary"
+                                >
+                                    Register
+                                </button>
+                            </Link>
+
+                        </div>
                     </div>
 
                 </div>
@@ -52,7 +64,8 @@ const Pricing = () => {
                             ><button
                                 disabled={isAdmin || isSurveyor || isProUser}
                                 className="btn btn-primary"
-                            >Upgrade to Pro-User</button></Link>
+                            >Upgrade to Pro-User</button>
+                            </Link>
 
                         </div>
                     </div>

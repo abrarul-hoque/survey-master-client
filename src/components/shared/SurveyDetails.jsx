@@ -7,6 +7,8 @@ import useAdmin from '../../hooks/useAdmin';
 import useSurveyor from '../../hooks/useSurveyor';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import useSurveys from '../../hooks/useSurveys';
 
 const SurveyDetails = () => {
     const { user } = useAuth();
@@ -16,8 +18,8 @@ const SurveyDetails = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [hasVoted, setHasVoted] = useState(false);
     const survey = useLoaderData();
-    const { _id, title, description, options, totalVotes } = survey;
-
+    const { _id, title, description, category, deadline, createdOn, yesOption, noOption } = survey;
+    const [, refetch] = useSurveys();
     useEffect(() => {
         if (user) {
             checkIfVoted();
@@ -48,15 +50,22 @@ const SurveyDetails = () => {
         }
         const voteResponse = {
             surveyId: _id,
-            vote: data?.vote,
+            vote: data?.vote.toLowerCase(),
             userEmail: user?.email,
             userName: user?.displayName,
         }
         try {
             const res = await axiosSecure.post("/vote", voteResponse);
-            if (res.data?.insertedId) {
+            if (res.data?.voteResult?.insertedId) {
                 console.log("Submitted Response", res.data);
                 setHasVoted(true);
+                refetch();
+                Swal.fire({
+                    title: "Success",
+                    text: "Your vote submitted Successfully",
+                    icon: "success",
+                    timer: 1500
+                });
             }
         } catch (error) {
 
@@ -118,6 +127,20 @@ const SurveyDetails = () => {
                         />
                     </form>
                 </div>
+
+                {
+                    hasVoted && <>
+                        <div className='shadow-xl border p-6 rounded-xl w-full lg:w-3/5 flex justify-center mx-auto bg-primary text-center'>
+                            <div >
+                                <h1 className='text-3xl text-warning font-bold mb-3'>Survey Result:</h1>
+                                <div className='text-white'>
+                                    <p className='text-base'>Votted for Yes: {yesOption}</p>
+                                    <p className='text-base'>Votted for No: {noOption}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
 
 
