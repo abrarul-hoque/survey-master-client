@@ -12,26 +12,35 @@ import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const [surveys] = useSurveys();
+    const [recentSurveys, setRecentSurveys] = useState([]);
+    const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        const fetchRecentSurveys = async () => {
+            try {
+                const res = await axiosPublic.get('/surveys/recent');
+                setRecentSurveys(res.data);
+                console.log(res.data);
+            }
+            catch (error) {
+                console.error("Error fetching recent surveys:", error);
+
+            }
+        };
+        fetchRecentSurveys();
+
+    }, []);
+
     console.log("before sort:", surveys)
+    console.log("Recent Surveys:", recentSurveys)
 
-    // const sortedSurveys = surveys.sort((a, b) => b.yesOption + b.noOption - (a.yesOption + a.noOption));
-    // console.log("after sort: ", sortedSurveys)
+    const sortedSurveys = surveys.sort((a, b) => {
+        const aVotes = (a.yesOption || 0) + (a.noOption || 0);
+        const bVotes = (b.yesOption || 0) + (b.noOption || 0);
+        return bVotes - aVotes;
+    });
 
-    // const [surveyQuestions, setSurveyQuestions] = useState([]);
-    const sixSurveys = surveys.slice(0, 6);
-    // const axiosPublic = useAxiosPublic();
-
-    // axiosPublic.get("/surveys");
-    // console.log(res.data);
-
-    // useEffect(() => {
-    //     fetch('/survey-data.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             setSurveyQuestions(data);
-    //         })
-    // }, [])
+    const sixMostVotedSurveys = sortedSurveys.slice(0, 6);
 
 
     return (
@@ -47,12 +56,24 @@ const Home = () => {
                 <SectionTitle subHeading={"Featured Surveys"} heading={"Most Voted Surveys in Survey Master"}></SectionTitle>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
                     {
-                        sixSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
+                        sixMostVotedSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
+                    }
+                </div>
+            </div>
+            <div className="divider"></div>
+
+            {/* 6 mons recently created surveys from the DB */}
+            <div>
+                <SectionTitle subHeading={"Latest Surveys"} heading={"Most Recently Created Surveys in Survey Master"}></SectionTitle>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
+                    {
+                        recentSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
                     }
                 </div>
             </div>
 
-            {/* 6 mons recently created surveys from the DB */}
+
+
             <FeaturedSurvey></FeaturedSurvey>
             <HowItWorks></HowItWorks>
             <FAQ></FAQ>
