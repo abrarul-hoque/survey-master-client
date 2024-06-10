@@ -26,6 +26,8 @@ import UpdateSurvey from "../components/Pages/Dashboard/SurveyorHome/UpdateSurve
 import ParticipatedSurveys from "../components/Pages/Dashboard/UserHome/ParticipatedSurveys";
 import Comments from "../components/Pages/Dashboard/UserHome/Comments";
 import Reports from "../components/Pages/Dashboard/UserHome/Reports";
+import AllSurvey from "../components/Pages/Dashboard/AdminHome/AllSurvey";
+import Feedbacks from "../components/Pages/Dashboard/SurveyorHome/Feedbacks";
 
 const router = createBrowserRouter([
     {
@@ -93,7 +95,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "feedbacks",
-                element: <UserHome></UserHome>
+                element: <Feedbacks></Feedbacks>
             },
 
 
@@ -137,6 +139,10 @@ const router = createBrowserRouter([
             {
                 path: "users",
                 element: <AdminRoute><Users></Users></AdminRoute>
+            },
+            {
+                path: "surveys",
+                element: <AdminRoute><AllSurvey></AllSurvey></AdminRoute>
             },
             {
                 path: "payments",
