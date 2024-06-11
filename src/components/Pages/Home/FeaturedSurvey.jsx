@@ -8,6 +8,8 @@ const FeaturedSurvey = () => {
     return (
         <div className=''>
             <SectionTitle subHeading={"Features"} heading={"Why Choose Survey Master"}></SectionTitle>
+            <div className="divider"></div>
+
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  featureCard'>
                 <div className='border p-4 lg:p-8 rounded-xl space-y-3 shadow-md mb-4 hover:bg-primary duration-500 hover:text-white'>
                     <FaFilePen className='text-3xl' />

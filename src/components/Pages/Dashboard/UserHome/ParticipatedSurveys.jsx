@@ -2,6 +2,7 @@ import React from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 const ParticipatedSurveys = () => {
     const { user } = useAuth();
@@ -27,6 +28,10 @@ const ParticipatedSurveys = () => {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Survey Master | Home</title>
+            </Helmet>
             <h1 className='text-3xl text-center my-4'>Participated Surveys: {surveys.length}</h1>
 
 

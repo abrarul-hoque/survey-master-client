@@ -30,7 +30,7 @@ const Feedbacks = () => {
             <h1 className='text-3xl font-bold text-center'>Feedbacks given by Admin</h1>
 
             {
-                unpublishSurveys.length === 0 ? <p className='text-xl text-center my-5'>You have not added any surveys yet!</p> :
+                unpublishSurveys.length === 0 ? <p className='text-xl text-center my-5'>No data found!</p> :
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}

@@ -60,11 +60,13 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <div className="divider"></div>
+            <FeaturedSurvey></FeaturedSurvey>
 
             {/* 6 mons recently created surveys from the DB */}
             <div>
                 <SectionTitle subHeading={"Latest Surveys"} heading={"Most Recently Created Surveys in Survey Master"}></SectionTitle>
+                <div className="divider"></div>
+
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
                     {
                         recentSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
@@ -72,9 +74,6 @@ const Home = () => {
                 </div>
             </div>
 
-
-
-            <FeaturedSurvey></FeaturedSurvey>
             <HowItWorks></HowItWorks>
             <FAQ></FAQ>
             <div className='p-6 lg:p-10 text-center bg-base-300 rounded-xl my-6'>

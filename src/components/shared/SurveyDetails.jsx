@@ -13,6 +13,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { reload } from 'firebase/auth';
 import moment from 'moment';
 import PostComment from './PostComment';
+
 const SurveyDetails = () => {
     const { user } = useAuth();
     const [isAdmin] = useAdmin();
@@ -49,7 +50,13 @@ const SurveyDetails = () => {
 
     const submitVote = async (data) => {
         if (!user) {
-            errorToast("Please log in to submit your vote!");
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "Please log in to submit your vote!",
+                showConfirmButton: false,
+                timer: 1500
+            });
             return;
         }
         const voteResponse = {
@@ -63,12 +70,6 @@ const SurveyDetails = () => {
             if (res.data?.voteResult?.insertedId) {
                 console.log("Submitted Response", res.data);
                 setHasVoted(true);
-                // Swal.fire({
-                //     title: "Success",
-                //     text: "Your vote submitted Successfully",
-                //     icon: "success",
-                //     // timer: 1500
-                // })
                 Swal.fire({
                     title: "Success",
                     text: "Your vote submitted Successfully",
@@ -168,7 +169,7 @@ const SurveyDetails = () => {
                 }
             </div>
             <div className='border p-6 my-2 rounded-xl shadow-md'>
-                <PostComment surveyId={_id}></PostComment>
+                <PostComment surveyId={_id} surveyName={title} deadline={deadline}></PostComment>
             </div>
 
 

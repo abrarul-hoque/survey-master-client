@@ -9,7 +9,7 @@ const Banner = () => {
                     <div className="text-center">
                         <h1 className='text-6xl font-bold max-w-3xl mb-4'>Create Powerful Surveys with Ease</h1>
                         <p className="mb-5 text-base">Engage your audience, gather insights, and make informed decisions.</p>
-                        <button className='btn btn-primary'>Explore</button>
+                        <button className='btn btn-primary' useRef="#Surveys">Explore Surveys</button>
                     </div>
                 </div>
             </div>
