@@ -28,6 +28,7 @@ import Comments from "../components/Pages/Dashboard/UserHome/Comments";
 import Reports from "../components/Pages/Dashboard/UserHome/Reports";
 import AllSurvey from "../components/Pages/Dashboard/AdminHome/AllSurvey";
 import Feedbacks from "../components/Pages/Dashboard/SurveyorHome/Feedbacks";
+import SurveyResponse from "../components/Pages/Dashboard/SurveyorHome/SurveyResponse";
 
 const router = createBrowserRouter([
     {
@@ -87,6 +88,11 @@ const router = createBrowserRouter([
             {
                 path: "surveys",
                 element: <SurveysBySurveyor></SurveysBySurveyor>
+            },
+            {
+                path: "surveys/:id",
+                element: <SurveyResponse></SurveyResponse>,
+                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/surveyor/surveys/${params.id}`)
             },
             {
                 path: "update/:id",

@@ -79,7 +79,7 @@ const SurveysBySurveyor = () => {
                                             <Link to={`/dashboard/surveyor/update/${survey._id}`}>
                                                 <button className='btn btn-warning mr-2 mb-1 btn-sm tooltip' alt="Update" data-tip="Update"><FaPen></FaPen></button>
                                             </Link>
-                                            <Link to={`/surveys/surveyDetails/${survey._id}`}>
+                                            <Link to={`/dashboard/surveyor/surveys/${survey._id}`}>
                                                 <button className="btn btn-primary mr-2 mb-1 btn-sm tooltip" alt="Details" data-tip="Details"><FcViewDetails /></button>
                                             </Link>
                                             <button onClick={() => handleDeleteSurvey(survey._id)} className='btn btn-error btn-sm'><FaTrash></FaTrash></button>

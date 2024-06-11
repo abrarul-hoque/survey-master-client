@@ -54,7 +54,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {!isAdmin && !isSurveyor && !isProUser && <Link to="/payment"><a className="btn btn-warning mr-2">Upgrade</a></Link>}
+                    {!isAdmin && !isSurveyor && !isProUser && <Link to="/payment"><a className="btn btn-warning mr-2 p-2">Upgrade</a></Link>}
 
                     {
                         user ?
@@ -75,7 +75,7 @@ const Header = () => {
                                 </Tooltip>
                             </div>
                             :
-                            <Link to="/login"><a className="btn btn-primary ml-2">Login</a></Link>
+                            <Link to="/login"><a className="btn btn-primary ml-2 p-2">Login</a></Link>
                     }
                 </div>
             </div>

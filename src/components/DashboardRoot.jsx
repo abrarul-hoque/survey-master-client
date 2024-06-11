@@ -8,7 +8,8 @@ import loader from '../assets/loader.svg';
 import useSurveyor from '../hooks/useSurveyor';
 import useProUser from '../hooks/useProUser';
 import { MdAdminPanelSettings, MdPayments } from "react-icons/md";
-import { FaList, FaUsers } from 'react-icons/fa6';
+import { FaList, FaPen, FaUsers } from 'react-icons/fa6';
+import { FaHome } from 'react-icons/fa';
 
 const DashboardRoot = () => {
     const { user, logOut } = useAuth();
@@ -59,10 +60,11 @@ const DashboardRoot = () => {
                             :
                             isSurveyor ? <>
                                 {console.log("Showing Surveyor menus")}
-                                <li><NavLink to="/dashboard/surveyor/surveyorHome">Surveyor Home</NavLink></li>
-                                <li><NavLink to="/dashboard/surveyor/create">Create a Survey</NavLink></li>
-                                <li><NavLink to="/dashboard/surveyor/surveys">Surveys</NavLink></li>
-                                <li><NavLink to="/dashboard/surveyor/feedbacks">Feedbacks</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/surveyorHome"><FaHome /> Surveyor Home</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/create"><FaPen /> Create a Survey</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/surveys"><FaList /> Surveys</NavLink></li>
+                                <li><NavLink to="/dashboard/surveyor/feedbacks"><FaList /> Feedbacks</NavLink></li>
+                                {/* <li><NavLink to="/dashboard/surveyor/surveyResponses">Survey Responses</NavLink></li> */}
 
                             </>
                                 :

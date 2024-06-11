@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
 import useSurveys from '../../hooks/useSurveys';
 import { useQueryClient } from '@tanstack/react-query';
 import { reload } from 'firebase/auth';
-
+import moment from 'moment';
+import PostComment from './PostComment';
 const SurveyDetails = () => {
     const { user } = useAuth();
     const [isAdmin] = useAdmin();
@@ -96,7 +97,6 @@ const SurveyDetails = () => {
 
 
 
-
     return (
         <div className='max-w-4xl mx-auto my-8'>
             <ToastContainer />
@@ -105,10 +105,21 @@ const SurveyDetails = () => {
                 <meta charSet="utf-8" />
                 <title>Survey Master | {title}</title>
             </Helmet>
-            <div className='border p-6 my-2 rounded-xl'>
-                <h1 className='text-xl font-bold mb-3'>{title}:</h1>
-                <h2 className='text-base mb-3'>{description}</h2>
-                <div >
+            <div className='border p-6 my-2 rounded-xl shadow-md'>
+                <h1 className='text-xl font-bold mb-3 text-center'>{title}:</h1>
+                <div className="divider"></div>
+
+                <h2 className='text-base mb-6'>{description}</h2>
+                <h3 className='text-base my-3'><span className='font-bold'>Survey Category:</span> {category}</h3>
+                <div className='flex justify-between'>
+                    <h3 className='text-base mb-8'><span className='font-bold'>Created On:</span> {moment(createdOn).format("Do MMM YYYY")}</h3>
+                    <h3 className='text-base mb-8'><span className='font-bold'>Deadline:</span> {moment(deadline).format("Do MMM YYYY")}</h3>
+                </div>
+
+
+                <p className='font-bold text-base mb-4'>Choose an option from the list below: </p>
+
+                <div className='ml-10'>
                     <form onSubmit={handleSubmit(submitVote)}>
                         <label className="cursor-pointer flex mb-4">
                             <input
@@ -155,6 +166,9 @@ const SurveyDetails = () => {
                         </div>
                     </>
                 }
+            </div>
+            <div className='border p-6 my-2 rounded-xl shadow-md'>
+                <PostComment surveyId={_id}></PostComment>
             </div>
 
 

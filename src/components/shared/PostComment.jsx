@@ -1,6 +1,7 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
-const PostComment = () => {
+const PostComment = ({ surveyId }) => {
     const {
         register,
         handleSubmit,
@@ -8,14 +9,14 @@ const PostComment = () => {
     } = useForm()
 
     const submitComment = data => {
-        console.log(data)
+        console.log(data, surveyId)
     }
     return (
         <div>
             <form onSubmit={handleSubmit(submitComment)}>
                 <label className="form-control">
                     <div className="label">
-                        <span className="label-text">Add comment:</span>
+                        <span className="label-text">Add a comment:</span>
                     </div>
                     <textarea {...register('comment', { required: true })} className="textarea textarea-bordered h-24" placeholder="Add your Comment"></textarea>
                     {/* errors will return when field validation fails  */}
