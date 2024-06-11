@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
-import useProUser from '../../hooks/useProUser';
+import useProUser from '../../../hooks/useProUser';
 import Swal from 'sweetalert2';
 
 const PostComment = ({ surveyId, surveyName, deadline }) => {

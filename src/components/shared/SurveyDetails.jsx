@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useAdmin from '../../hooks/useAdmin';
 import useSurveyor from '../../hooks/useSurveyor';
@@ -12,7 +12,8 @@ import useSurveys from '../../hooks/useSurveys';
 import { useQueryClient } from '@tanstack/react-query';
 import { reload } from 'firebase/auth';
 import moment from 'moment';
-import PostComment from './PostComment';
+import PostComment from '../Pages/Surveys/PostComment';
+import { MdReportProblem } from "react-icons/md";
 
 const SurveyDetails = () => {
     const { user } = useAuth();
@@ -97,6 +98,64 @@ const SurveyDetails = () => {
 
 
 
+    const handleReport = (survey) => {
+        console.log(survey);
+        if (!user) {
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "Please log in to Report on a survey!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return;
+        }
+        Swal.fire({
+            title: 'Warning!',
+            text: `Are your sure to report for ${survey.title}?`,
+            icon: 'warning',
+            input: 'textarea', // Add an input field for the admin message
+            inputPlaceholder: 'Enter your text here...',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Report it!',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Please write something!'
+                }
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const reportMessage = result.value; // Get the admin message
+                const reportData = {
+                    reportMessage: reportMessage,
+                    surveyId: survey._id,
+                    surveyTitle: survey.title,
+                    userEmail: user?.email,
+                    reportedOn: new Date().toLocaleString(),
+                }
+                const res = await axiosSecure.post('/reports', reportData)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            // perform post a report message on db
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `Report submitted for ${survey.title} `,
+                                showConfirmButton: true,
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Error Reporting survey :", error);
+                    })
+            }
+        });
+
+
+    }
 
     return (
         <div className='max-w-4xl mx-auto my-8'>
@@ -116,7 +175,6 @@ const SurveyDetails = () => {
                     <h3 className='text-base mb-8'><span className='font-bold'>Created On:</span> {moment(createdOn).format("Do MMM YYYY")}</h3>
                     <h3 className='text-base mb-8'><span className='font-bold'>Deadline:</span> {moment(deadline).format("Do MMM YYYY")}</h3>
                 </div>
-
 
                 <p className='font-bold text-base mb-4'>Choose an option from the list below: </p>
 
@@ -152,6 +210,11 @@ const SurveyDetails = () => {
                             disabled={isAdmin || isSurveyor || hasVoted}
                         />
                     </form>
+                    <div className='flex justify-end'>
+                        <button onClick={() => handleReport(survey)} className='text-red-500 font-semibold mb-4 flex items-center'>
+                            <MdReportProblem className='mr-1' /> Report Inappropriate Content
+                        </button>
+                    </div>
                 </div>
 
                 {

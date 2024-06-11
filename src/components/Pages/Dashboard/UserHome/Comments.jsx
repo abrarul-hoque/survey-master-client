@@ -30,26 +30,25 @@ const Comments = () => {
                             {/* head */}
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Survey Title</th>
-                                    <th>Category</th>
+                                    <th>#</th>
+                                    <th>Survey Name</th>
                                     <th>Deadline</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Comment</th>
+                                    <th>Commented On</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     comments.map((comment, idx) => <tr key={comment._id} className="hover">
                                         <th>{idx + 1}</th>
-                                        <td>{comment.title}</td>
-                                        <td>{comment.category}</td>
+                                        <td>{comment.surveyName}</td>
                                         <td>{new Date(comment.deadline).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric'
                                         })}</td>
-                                        <td>{comment.surveyStatus}</td>
+                                        <td>{comment.comment}</td>
+                                        <td>{comment.commentedOn}</td>
                                         <td>
                                             {/* <Link to={`/dashboard/surveyor/update/${comment._id}`}>
                                                 <button className='btn btn-warning mr-2 mb-1 btn-sm tooltip' alt="Update" data-tip="Update"><FaPen></FaPen></button>
