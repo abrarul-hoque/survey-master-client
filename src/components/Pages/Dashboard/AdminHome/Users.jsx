@@ -12,6 +12,7 @@ const Users = () => {
     const axiosSecure = useAxiosSecure();
     const [isAdmin] = useAdmin();
     const { user } = useAuth();
+    const [selectedRole, setSelectedRole] = useState('all');
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -21,6 +22,7 @@ const Users = () => {
         }
     });
 
+    const filteredUsers = selectedRole === "all" ? users : users.filter(user => user.role === selectedRole);
 
     const handleMakeSurveyor = user => {
         console.log(user);
@@ -74,11 +76,26 @@ const Users = () => {
                 <title>Survey Master | Dashboard | Users</title>
             </Helmet>
 
-            <h1>Users </h1>
             <div>
                 <div className="flex justify-between my-4">
                     <h2 className="text-3xl">All Users</h2>
                     <h2 className="text-3xl">Total Users: {users.length}</h2>
+                </div>
+                <div className='flex justify-center'>
+                    <div className='my-4'>
+                        <label htmlFor="roleFilter" className='mr-2 font-semibold'>Filter by Role:</label>
+                        <select
+                            id="roleFilter"
+                            value={selectedRole}
+                            onChange={e => setSelectedRole(e.target.value)}
+                            className='select select-bordered py-1 border-primary border border-2'
+                        >
+                            <option value="all">All</option>
+                            <option value="admin">Admin</option>
+                            <option value="surveyor">Surveyor</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -95,7 +112,7 @@ const Users = () => {
                         </thead>
                         <tbody>
                             {
-                                users.map((singleUser, idx) => <tr key={singleUser._id} className="bg-base-200">
+                                filteredUsers.map((singleUser, idx) => <tr key={singleUser._id} className="bg-base-200">
                                     <th>{idx + 1}</th>
                                     <td>{singleUser.name}</td>
                                     <td>{singleUser.email}</td>
