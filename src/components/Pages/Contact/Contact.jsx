@@ -38,7 +38,7 @@ const Contact = () => {
                 <meta charSet="utf-8" />
                 <title>Survey Master | Contact</title>
             </Helmet>
-            <h1 className='text-4xl font-bold mb-4 text-center'>Get in Touch</h1>
+            <h1 className='text-2xl lg:text-4xl font-bold mb-4 text-center'>Get in Touch</h1>
 
             <div className='flex flex-col lg:flex-row items-center gap-4'>
                 <div className='flex-1'>
