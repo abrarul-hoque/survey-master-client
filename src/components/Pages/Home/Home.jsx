@@ -24,6 +24,7 @@ const Home = () => {
             easing: 'ease-in-sine',
             once: false,
         });
+        AOS.refresh();
     }, []);
 
     useEffect(() => {

@@ -29,6 +29,8 @@ import Reports from "../components/Pages/Dashboard/UserHome/Reports";
 import AllSurvey from "../components/Pages/Dashboard/AdminHome/AllSurvey";
 import Feedbacks from "../components/Pages/Dashboard/SurveyorHome/Feedbacks";
 import SurveyResponse from "../components/Pages/Dashboard/SurveyorHome/SurveyResponse";
+import Contact from "../components/Pages/Contact/Contact";
+import ContactMessage from "../components/Pages/Dashboard/AdminHome/ContactMessage";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +62,10 @@ const router = createBrowserRouter([
             {
                 path: "/aboutUs",
                 element: <AboutUs></AboutUs>
+            },
+            {
+                path: "/contact",
+                element: <Contact></Contact>
             },
             {
                 path: "/login",
@@ -130,6 +136,10 @@ const router = createBrowserRouter([
             {
                 path: "comments",
                 element: <Comments />
+            },
+            {
+                path: "contactMessage",
+                element: <ContactMessage></ContactMessage>
             },
             {
                 path: "surveys/:id",

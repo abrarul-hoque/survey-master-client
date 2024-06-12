@@ -10,6 +10,7 @@ import useProUser from '../hooks/useProUser';
 import { MdAdminPanelSettings, MdPayments } from "react-icons/md";
 import { FaList, FaPen, FaUsers } from 'react-icons/fa6';
 import { FaHome } from 'react-icons/fa';
+import { MdMessage } from "react-icons/md";
 
 const DashboardRoot = () => {
     const { user, logOut } = useAuth();
@@ -56,6 +57,7 @@ const DashboardRoot = () => {
                             <li><NavLink to="/dashboard/users"><FaUsers /> Manage Users</NavLink></li>
                             <li><NavLink to="/dashboard/surveys"><FaList /> Manage Surveys</NavLink></li>
                             <li><NavLink to="/dashboard/payments"><MdPayments /> Payments</NavLink></li>
+                            <li><NavLink to="/dashboard/contactMessage"><MdMessage /> Contact Messages</NavLink></li>
                         </>
                             :
                             isSurveyor ? <>
@@ -90,6 +92,8 @@ const DashboardRoot = () => {
 
                     <div className='divider'></div>
                     <li ><NavLink to="/" className="mt-16">Home</NavLink></li>
+                    <li ><NavLink to="/aboutUs" className="">About</NavLink></li>
+                    <li ><NavLink to="/contact" className="">Contact Us</NavLink></li>
                     <button onClick={handleSignOut} className='btn'>Logout</button>
                 </ul>
             </div>

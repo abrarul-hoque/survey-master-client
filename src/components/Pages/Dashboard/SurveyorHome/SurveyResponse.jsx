@@ -23,7 +23,7 @@ const SurveyResponse = () => {
 
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Survey Master | Surveys</title>
+                <title>Survey Master | Survey Response</title>
             </Helmet>
             <h1 className='text-3xl font-bold text-center'>Total Response for this Survey: {surveyResponse.length}</h1>
 
