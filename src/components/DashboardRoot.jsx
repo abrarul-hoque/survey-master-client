@@ -53,7 +53,7 @@ const DashboardRoot = () => {
                                 <img className='rounded-full h-20 w-20 border-4 border-warning' src={user.photoURL} alt="" />
                             </div>
                             <li><NavLink to="/dashboard/adminHome"><MdAdminPanelSettings />Admin Home</NavLink></li>
-                            <li><NavLink to="/dashboard/users"><FaUsers /> Users</NavLink></li>
+                            <li><NavLink to="/dashboard/users"><FaUsers /> Manage Users</NavLink></li>
                             <li><NavLink to="/dashboard/surveys"><FaList /> Manage Surveys</NavLink></li>
                             <li><NavLink to="/dashboard/payments"><MdPayments /> Payments</NavLink></li>
                         </>

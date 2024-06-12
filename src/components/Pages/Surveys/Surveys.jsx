@@ -64,7 +64,7 @@ const Surveys = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
                 {
                     // surveys[0].map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
-                    sortedSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
+                    sortedSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey} ></SurveyCard>)
                 }
             </div>
         </div >

@@ -21,8 +21,8 @@ const Pricing = () => {
                 <title>Survey Master | Pricing Page</title>
             </Helmet>
             <SectionTitle subHeading={"Choose the Plan That's Right for You"} heading={"Upgrade to Pro and Unlock Advanced Features"}></SectionTitle>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8">
-                <div className="border p-8 rounded-xl PricingCard">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8 ">
+                <div className="border p-8 rounded-xl PricingCard hvr-curl-top-right hvr-float">
                     <h1 className="text-2xl font-bold">Basic Plan - Free</h1>
                     <div className="divider my-0"></div>
                     <div>
@@ -46,7 +46,7 @@ const Pricing = () => {
                     </div>
 
                 </div>
-                <div className="border p-8 rounded-xl PricingCard">
+                <div className="border p-8 rounded-xl PricingCard hvr-curl-top-right hvr-float">
                     <h1 className="text-2xl font-bold">Pro Plan - $75/Year </h1>
                     <div className="divider my-0"></div>
                     <div>

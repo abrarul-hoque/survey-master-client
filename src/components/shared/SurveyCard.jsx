@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
-const SurveyCard = ({ survey }) => {
+
+const SurveyCard = ({ survey, aosAnimation }) => {
     const { _id, title, description, category, yesOption, noOption, deadline, createdOn } = survey;
 
 
+
     return (
-        <div className='border p-6 my-2 rounded-xl shadow-md'>
+        <div className='border p-6 my-2 rounded-xl shadow-md hvr-float' data-aos={aosAnimation}>
             <h1 className='text-xl font-bold mb-3 text-center'>{title}:</h1>
             <div className="divider"></div>
 

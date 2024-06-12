@@ -8,7 +8,6 @@ const Reports = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-
     const { data: reports = [] } = useQuery({
         queryKey: ['reports', user?.email],
         queryFn: async () => {

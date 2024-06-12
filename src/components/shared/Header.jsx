@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import useAdmin from '../../hooks/useAdmin';
 import useSurveyor from '../../hooks/useSurveyor';
 import useProUser from '../../hooks/useProUser';
+import Tilt from 'react-parallax-tilt';
 
 const Header = () => {
     const { user, logOut } = useAuth();
@@ -46,7 +47,11 @@ const Header = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to="/"><a className=""><img src={mainLogo} alt="" /></a></Link>
+                    <Tilt>
+                        <Link to="/"><a className=""><img src={mainLogo} alt="" /></a></Link>
+                    </Tilt>
+
+
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

@@ -85,21 +85,7 @@ const AllSurvey = () => {
             }
         });
 
-        // axiosSecure.patch(`/admin/survey/${survey._id}`)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.modifiedCount > 0) {
-        //             refetch();
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: `${survey.title} is Unpublished!`,
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
 
-        //         }
-        //     });
     }
 
 
@@ -155,16 +141,21 @@ const AllSurvey = () => {
                                 <td>{survey.surveyStatus}</td>
                                 <td >
                                     <div className='flex flex-col justify-center'>
+                                        <Link to={`/dashboard/surveyor/surveys/${survey._id}`}>
+                                            <button className="btn btn-primary mr-2 mb-1 btn-sm tooltip" alt="Responses" data-tip="Responses">Responses</button>
+                                        </Link>
                                         <button
                                             onClick={() => handleUnpublish(survey)}
                                             className='btn btn-warning mr-2 mb-1 btn-sm tooltip'
                                             alt="Update"
-                                            data-tip="Update"
+                                            data-tip="Unpublish Survey"
                                             disabled={survey.surveyStatus === "unpublish"}
                                         >
                                             Unpublish
                                         </button>
-                                        <button onClick={() => handleDeleteSurvey(survey._id)} className='btn btn-error btn-sm'><FaTrash className='text-white' /></button>
+                                        <button onClick={() => handleDeleteSurvey(survey._id)} className='btn btn-error btn-sm mr-2 mb-1 '>Delete</button>
+
+
                                     </div>
 
                                 </td>

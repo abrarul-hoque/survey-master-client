@@ -9,11 +9,22 @@ import SectionTitle from '../../shared/SectionTitle';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import useSurveys from '../../../hooks/useSurveys';
 import { Helmet } from 'react-helmet';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
     const [surveys] = useSurveys();
     const [recentSurveys, setRecentSurveys] = useState([]);
     const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1200,
+            offset: 200,
+            easing: 'ease-in-sine',
+            once: false,
+        });
+    }, []);
 
     useEffect(() => {
         const fetchRecentSurveys = async () => {
@@ -49,14 +60,14 @@ const Home = () => {
                 <meta charSet="utf-8" />
                 <title>Survey Master | Home</title>
             </Helmet>
-            <Banner></Banner>
+            <Banner aosAnimation={"zoom-in-down"}></Banner>
 
             {/* 6 most voted surveys from DB */}
             <div>
                 <SectionTitle subHeading={"Featured Surveys"} heading={"Most Voted Surveys in Survey Master"}></SectionTitle>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
                     {
-                        sixMostVotedSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
+                        sixMostVotedSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey} aosAnimation={"fade-down-left"}></SurveyCard>)
                     }
                 </div>
             </div>
@@ -69,7 +80,7 @@ const Home = () => {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5'>
                     {
-                        recentSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey}></SurveyCard>)
+                        recentSurveys.map((survey, idx) => <SurveyCard key={idx} survey={survey} aosAnimation="fade-right"></SurveyCard>)
                     }
                 </div>
             </div>

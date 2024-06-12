@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import footerLogo from '../../assets/logo-footer.png';
+import Tilt from 'react-parallax-tilt';
 
 const Footer = () => {
     return (
@@ -7,8 +8,10 @@ const Footer = () => {
             <div className='max-w-6xl mx-auto'>
                 <footer className="footer p-10 ">
                     <aside>
-                        <div className=''>
-                            <img className='w-28' src={footerLogo} alt="" />
+                        <div className='hvr-float hvr-grow'>
+                            <Tilt>
+                                <img className='w-28' src={footerLogo} alt="" />
+                            </Tilt>
                         </div>
 
                         <p>Engage your audience, gather insights, <br />and make informed decisions.</p>
@@ -25,6 +28,7 @@ const Footer = () => {
                         <Link to="/aboutUs"><a className="link link-hover">About us</a></Link>
                         <Link to="/contact"><a className="link link-hover">Contact</a></Link>
                         <Link to="/surveys"><a className="link link-hover">Surveys</a></Link>
+                        <Link to="/helpCenter"><a className="link link-hover">Help Center</a></Link>
                     </nav>
                     <nav>
                         <h6 className="footer-title">Legal</h6>

@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/payment",
-                element: <Payment></Payment>
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             },
             {
                 path: "/aboutUs",
@@ -130,6 +130,11 @@ const router = createBrowserRouter([
             {
                 path: "comments",
                 element: <Comments />
+            },
+            {
+                path: "surveys/:id",
+                element: <SurveyResponse></SurveyResponse>,
+                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/surveyor/surveys/${params.id}`)
             },
             {
                 path: "userPayments",
