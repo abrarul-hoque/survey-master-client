@@ -4,20 +4,21 @@ import useAxiosSecure from './useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 
 const useProUser = () => {
-    const { user, loading: authLoading } = useAuth();
+    const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { data: isProUser, isPending: isProUserLoading } = useQuery({
         queryKey: [user?.email, 'isProUser'],
+        // enabled: !loading,
+        enabled: !!user?.email,
         queryFn: async () => {
             console.log("Asking the user is pro-user", user);
             const res = await axiosSecure.get(`/users/proUser/${user?.email}`);
             console.log(res.data);
             return res.data?.proUser;
         },
-        enabled: !!user?.email
     });
 
-    return [isProUser, isProUserLoading || authLoading]
+    return [isProUser, isProUserLoading]
 };
 
 export default useProUser;

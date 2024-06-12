@@ -20,7 +20,7 @@ const AdminHome = () => {
             <div className='flex flex-col lg:flex-row items-center gap-8 my-4 shadow-md p-10'>
                 <div className='flex-1'>
                     <div className='flex justify-center'>
-                        <img className='rounded-full border-4 border-warning' src={user.photoURL} alt="" />
+                        <img className='rounded-full border-4 border-warning h-36 w-36' src={user.photoURL} alt="" />
                     </div>
                 </div>
                 <div className='flex-1 space-y-3'>

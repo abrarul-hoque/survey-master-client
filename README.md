@@ -2,16 +2,7 @@
 
 SurveyMaster is a comprehensive web application designed to create, manage, and participate in surveys. The platform provides an intuitive user interface for survey creation, robust backend support for managing survey data, and engaging features for users to interact with surveys. Whether you're looking to gather opinions, conduct research, or simply engage with your audience, SurveyMaster offers a seamless and efficient solution.
 
-## Client Side Link
-
-Your client side link here.
-
-## Server Side Link
-
-(https://github.com/programming-hero-web-course1/b9a12-server-side-Abrarulctg)
-
 ## Live Link
-
 (https://survey-master.netlify.app/)
 
 ## Admin Credentials
