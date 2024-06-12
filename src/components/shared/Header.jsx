@@ -71,8 +71,8 @@ const Header = () => {
                                 </a>
                                 <Tooltip className='z-9999 rounded-xl' anchorSelect="#clickable" clickable>
                                     <div className='flex flex-col'>
-                                        <p className=' text-[#ff9123] font-bold p-3 rounded-xl'>{user.displayName}</p>
-                                        <p className='text-warning my-4 font-semibold'>Logged in as: {isAdmin ? "Admin" : isSurveyor ? "Surveyor" : isProUser ? "Pro-User" : "User"} </p>
+                                        <p className=' text-[#ff9123] font-bold text-base p-3 rounded-xl'>{user.displayName}</p>
+                                        <p className='text-warning my-4 font-semibold text-base'>Logged in as: {isAdmin ? "Admin" : isSurveyor ? "Surveyor" : isProUser ? "Pro-User" : "User"} </p>
 
                                         <button onClick={handleSignOut} className='mb-3 btn btn-success text-[#000] p-3 rounded-xl'>Logout</button>
 

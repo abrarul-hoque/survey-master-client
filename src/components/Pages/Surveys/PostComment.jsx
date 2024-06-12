@@ -94,7 +94,7 @@ const PostComment = ({ surveyId, surveyName, deadline }) => {
                     {errors.comment && <span className='text-red-400 my-4'>Please Write a comment..</span>}
                 </label>
                 <div className='flex justify-end'>
-                    <input className='btn btn-warning my-5' type="submit" value="Post comment" />
+                    <input className='btn btn-warning my-5' type="submit" value="Post comment" disabled={!isProUser} />
 
                 </div>
             </form>

@@ -211,7 +211,11 @@ const SurveyDetails = () => {
                         />
                     </form>
                     <div className='flex justify-end'>
-                        <button onClick={() => handleReport(survey)} className='text-red-500 font-semibold mb-4 flex items-center'>
+                        <button
+                            onClick={() => handleReport(survey)}
+                            className='text-red-500 font-semibold mb-4 flex items-center'
+                            disabled={isAdmin || isSurveyor}
+                        >
                             <MdReportProblem className='mr-1' /> Report Inappropriate Content
                         </button>
                     </div>

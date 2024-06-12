@@ -36,6 +36,7 @@ const CheckOut = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setTransactionId("")
         if (!stripe || !elements) {
             return;
         }
@@ -80,7 +81,7 @@ const CheckOut = () => {
 
                 //save the payment infor in database
                 const payment = {
-                    name: user?.name,
+                    name: user?.displayName || "anonymous",
                     email: user.email,
                     price: totalPrice,
                     transactionId: paymentIntent.id,
@@ -90,15 +91,16 @@ const CheckOut = () => {
                 const res = await axiosSecure.post('/payments', payment);
                 console.log("payment saved", res.data);
 
-                if (res.data?.paymentResult?.insertedId) {
-                    window.location.reload();
+                if (res.data?.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
                         title: "Thank you for Payment.",
                         showConfirmButton: false,
                         timer: 1500
-                    });
+                    }).then(() => {
+                        navigate('/')
+                    })
                 }
             }
         }

@@ -108,9 +108,9 @@ const Login = () => {
                         <h3 className='text-base text-center mt-3'>New to Survey Master? <Link to="/register" className='underline font-bold'>Register</Link></h3>
                         <input className='btn btn-primary my-5' type="submit" value="Login" />
                     </form>
-                    <div className="divider"></div>
+                    <div className="divider">Or</div>
 
-                    <div>
+                    <div className='flex justify-center'>
                         <SocialLogin></SocialLogin>
                     </div>
                 </div>
