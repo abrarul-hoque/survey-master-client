@@ -7,6 +7,7 @@ import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
+import SocialLogin from '../../shared/SocialLogin';
 
 const Login = () => {
     const { signIn, setUser } = useAuth();
@@ -36,8 +37,10 @@ const Login = () => {
 
     const handleLogin = data => {
         console.log(data)
+
         signIn(data.email, data.password)
             .then(res => {
+                localStorage.clear();
                 const user = res.user;
                 setUser(user);
                 Swal.fire({
@@ -105,6 +108,11 @@ const Login = () => {
                         <h3 className='text-base text-center mt-3'>New to Survey Master? <Link to="/register" className='underline font-bold'>Register</Link></h3>
                         <input className='btn btn-primary my-5' type="submit" value="Login" />
                     </form>
+                    <div className="divider"></div>
+
+                    <div>
+                        <SocialLogin></SocialLogin>
+                    </div>
                 </div>
 
             </div>

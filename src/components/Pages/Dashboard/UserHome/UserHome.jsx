@@ -1,12 +1,16 @@
 import { Helmet } from "react-helmet";
 import useAuth from "../../../../hooks/useAuth";
 import useProUser from "../../../../hooks/useProUser";
+import { BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend, Tooltip } from 'recharts';
 
 
 const UserHome = () => {
     const { user } = useAuth();
     const [isProUser] = useProUser();
     console.log(isProUser)
+
+
+
     return (
         <div>
             <Helmet>
@@ -28,6 +32,23 @@ const UserHome = () => {
                     <h1 className='text-xl lg:text-2xl'>User Role: {isProUser ? "Pro-User" : "User"}</h1>
                 </div>
             </div>
+
+
+            {/* <div className="border shadow-md">
+                <div style={{ width: '100%', height: 400 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={""} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="voteFor" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="value" fill="#8884d8" />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            </div> */}
+
         </div>
     );
 };

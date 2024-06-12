@@ -69,7 +69,7 @@ const Header = () => {
                                         <img className='rounded-full w-16 h-10 mr-2 bg-white p-1 border border-red-400' src={user.photoURL || "https://i.ibb.co/XX4DwkF/default-user.webps"} alt="" />
                                     </div>
                                 </a>
-                                <Tooltip className='z-9999' anchorSelect="#clickable" clickable>
+                                <Tooltip className='z-9999 rounded-xl' anchorSelect="#clickable" clickable>
                                     <div className='flex flex-col'>
                                         <p className=' text-[#ff9123] font-bold p-3 rounded-xl'>{user.displayName}</p>
                                         <p className='text-warning my-4 font-semibold'>Logged in as: {isAdmin ? "Admin" : isSurveyor ? "Surveyor" : isProUser ? "Pro-User" : "User"} </p>

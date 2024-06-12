@@ -2,7 +2,7 @@ import bannerBg from '../../../assets/banner-bg.jpg';
 
 const Banner = ({ aosAnimation }) => {
     return (
-        <div data-aos={aosAnimation}>
+        <div className='z-1'>
             <div className="hero min-h-screen rounded-xl" style={{ backgroundImage: `url(${bannerBg})` }}>
                 <div className="hero-overlay bg-opacity-30 rounded-xl"></div>
                 <div className="hero-content">
