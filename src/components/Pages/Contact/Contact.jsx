@@ -3,6 +3,7 @@ import contactImg from '../../../assets/contact-image.gif';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 const Contact = () => {
     const {
         register,

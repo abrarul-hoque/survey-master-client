@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             {
                 path: "/surveys/surveyDetails/:id",
                 element: <SurveyDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/surveys/surveyDetails/${params.id}`)
+                loader: ({ params }) => fetch(`https://survey-app-server-hazel.vercel.app/surveys/surveyDetails/${params.id}`)
             },
             {
                 path: "/pricing",
@@ -98,12 +98,12 @@ const router = createBrowserRouter([
             {
                 path: "surveys/:id",
                 element: <SurveyResponse></SurveyResponse>,
-                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/surveyor/surveys/${params.id}`)
+                loader: ({ params }) => fetch(`https://survey-app-server-hazel.vercel.app/dashboard/surveyor/surveys/${params.id}`)
             },
             {
                 path: "update/:id",
                 element: <UpdateSurvey></UpdateSurvey>,
-                loader: ({ params }) => fetch(`http://localhost:5000/surveys/surveyDetails/${params.id}`)
+                loader: ({ params }) => fetch(`https://survey-app-server-hazel.vercel.app/surveys/surveyDetails/${params.id}`)
             },
             {
                 path: "feedbacks",
@@ -144,7 +144,7 @@ const router = createBrowserRouter([
             {
                 path: "surveys/:id",
                 element: <SurveyResponse></SurveyResponse>,
-                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/surveyor/surveys/${params.id}`)
+                loader: ({ params }) => fetch(`https://survey-app-server-hazel.vercel.app/dashboard/surveyor/surveys/${params.id}`)
             },
             {
                 path: "userPayments",
