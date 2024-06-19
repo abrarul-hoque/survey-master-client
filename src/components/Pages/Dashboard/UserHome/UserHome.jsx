@@ -4,6 +4,8 @@ import useProUser from "../../../../hooks/useProUser";
 import { BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend, Tooltip } from 'recharts';
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { useEffect } from "react";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const colors2 = ['#00C49F', '#0088FE', '#FFBB28', '#FF8042',];
 const barColors = ['#0088FE', '#00C49F', '#FFBB28'];
@@ -12,8 +14,10 @@ const UserHome = () => {
     const { user } = useAuth();
     const [isProUser] = useProUser();
     console.log(isProUser)
+    const axiosSecure = useAxiosSecure();
 
-    const { data: surveys = [], refetch } = useQuery({
+
+    const { data: surveys = [], refetch: refetchSurveys } = useQuery({
         queryKey: ['surveys', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/surveys/${user?.email}`);
@@ -22,7 +26,7 @@ const UserHome = () => {
         }
     });
 
-    const { data: reports = [] } = useQuery({
+    const { data: reports = [], refetch: refetchReports } = useQuery({
         queryKey: ['reports', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/reports/${user?.email}`);
@@ -30,7 +34,7 @@ const UserHome = () => {
             return res.data;
         }
     });
-    const { data: comments = [] } = useQuery({
+    const { data: comments = [], refetch: refetchComments } = useQuery({
         queryKey: ['comments', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/comments/${user?.email}`);
@@ -38,10 +42,10 @@ const UserHome = () => {
             return res.data;
         }
     });
-    const { data: payments = [] } = useQuery({
-        queryKey: ['payments', user.email],
+    const { data: payments = [], refetch: refetchPayments } = useQuery({
+        queryKey: ['payments', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/payments/${user.email}`);
+            const res = await axiosSecure.get(`/payments/${user?.email}`);
             return res.data;
         }
     })
@@ -74,7 +78,12 @@ const UserHome = () => {
     //     { topic: "Feedbacks", value: unpublishSurveys.length },
     // ];
 
-
+    useEffect(() => {
+        refetchSurveys();
+        refetchReports();
+        refetchComments();
+        refetchPayments();
+    }, [refetchSurveys, refetchReports, refetchComments, refetchPayments]);
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import useAuth from '../../../../hooks/useAuth';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip } from 'recharts';
@@ -20,6 +20,10 @@ const SurveyorHome = () => {
             return res.data;
         }
     });
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
 
     const publishedSurveys = surveysBySurveyor.filter(survey => survey.surveyStatus === "publish");
     const unPublishedSurveys = surveysBySurveyor.filter(survey => survey.surveyStatus === "unpublish");
@@ -64,7 +68,7 @@ const SurveyorHome = () => {
                 <div className='w-full lg:w-1/2 shadow-md rounded-xl'>
                     <div style={{ height: 400, padding: 0 }}>
                         <ResponsiveContainer height="100%">
-                            <h1 className="text-2xl font-bold mt-5 text-center ">Surveys:</h1>
+                            <h1 className="text-2xl font-bold mt-5 text-center ">Surveys & Feedbacks</h1>
                             <PieChart width={400} height={400}>
 
                                 <Pie
@@ -93,7 +97,7 @@ const SurveyorHome = () => {
                 <div className='w-full lg:w-1/2 shadow-md rounded-xl'>
                     <div style={{ height: 400, padding: 0 }}>
                         <ResponsiveContainer height="100%">
-                            <h1 className="text-2xl font-bold mt-5 text-center ">Surveys:</h1>
+                            <h1 className="text-2xl font-bold mt-5 text-center ">Published & Unpublished Surveys:</h1>
                             <PieChart width={400} height={400}>
 
                                 <Pie
