@@ -84,7 +84,87 @@ SurveyMaster is a comprehensive web application designed to create, manage, and 
 - **Tailwind CSS:** For styling and responsive design.
 - **Git:** For version control and collaboration.
 
+## Local Installation Guide for SurveyMaster
+If you wish to clone the SurveyMaster repository and run it locally on your machine, follow these steps:
 
+**Prerequisites**
+- Node.js (v14.x or higher)
+- npm (v6.x or higher)
+- MongoDB (v4.x or higher)
+- Git
+
+**Step 1: Clone the Repository**
+First, clone the repository from GitHub to your local machine using the following command:
+
+git clone https://github.com/abrarul-hoque/survey-master.git
+
+## Navigate into the project directory:
+cd survey-master
+
+**Step 2: Install Dependencies**
+Install the necessary dependencies for both the frontend and backend:
+
+# Install frontend dependencies
+cd client
+npm install
+
+# Install backend dependencies
+cd ../server
+npm install
+
+**Step 3: Set Up Environment Variables**
+Create a .env file in the server directory and add the following environment variables:
+
+env
+Copy code
+# Server Environment Variables
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+
+# Firebase Configuration (if used for hosting and authentication)
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+FIREBASE_APP_ID=your_firebase_app_id
+
+# Client Environment Variables
+REACT_APP_API_URL=http://localhost:5000
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
+Replace your_mongodb_connection_string, your_jwt_secret, your_stripe_secret_key, and Firebase configuration values with your actual credentials.
+
+**Step 4: Start the Backend Server**
+In the server directory, start the backend server:
+
+bash
+Copy code
+npm start
+This will start the server on http://localhost:5000.
+
+**Step 5: Start the Frontend Server**
+Open a new terminal window, navigate to the client directory, and start the frontend server:
+
+bash
+Copy code
+cd client
+npm start
+This will start the frontend on http://localhost:3000.
+
+**Step 6: Access the Application**
+Open your web browser and navigate to http://localhost:3000 to access the SurveyMaster application.
+
+## Troubleshooting
+Ensure MongoDB is running on your local machine or the connection string is correctly pointing to your MongoDB instance.
+Verify that all required environment variables are correctly set up.
+Check the console logs for any errors and follow the error messages for troubleshooting.
 
 ## Contact
 
